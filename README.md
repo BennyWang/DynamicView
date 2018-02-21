@@ -20,13 +20,6 @@ DynamicView
 
 ### 节点说明
 
-```xml
-<VBox>
-    <TitleView title="Hello world" logo="{logo}" />
-    <BodyView />
-    <FooterView />
-</VBox>
-```
 节点的名称是我们需要自定义控件的类名，属性是定义的类的setter，例如针对TitleView我们会有如下定义
 
 ```java
