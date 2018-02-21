@@ -56,25 +56,23 @@ public class DynamicViewProcessor extends AbstractProcessor {
     }
 
     private void parsePropertySetter(Element element, Map<TypeElement, DynamicViewClass> targetClassMap) {
-        DynamicViewClass dynamicViewClass = getOrCreateViewModelClass(targetClassMap, (TypeElement) element);
+        DynamicViewClass dynamicViewClass = getOrCreateDynamicViewClass(targetClassMap, (TypeElement) element);
         for (Element member : element.getEnclosedElements()) {
-            System.out.println("parse method start = " + member.getSimpleName().toString());
             if (member.getKind() != ElementKind.METHOD || !DynamicViewSetter.isValidSetterMethod((ExecutableElement) member)) {
                 continue;
             }
-            System.out.println("parse method end = " + member.getSimpleName().toString());
             dynamicViewClass.addSetter(new DynamicViewSetter(member.getSimpleName().toString()));
         }
     }
 
-    private DynamicViewClass getOrCreateViewModelClass(Map<TypeElement, DynamicViewClass> targetClassMap, TypeElement enclosingElement) {
+    private DynamicViewClass getOrCreateDynamicViewClass(Map<TypeElement, DynamicViewClass> targetClassMap, TypeElement enclosingElement) {
         DynamicViewClass dynamicViewClass = targetClassMap.get(enclosingElement);
         if (dynamicViewClass == null) {
             String targetType = enclosingElement.getQualifiedName().toString();
             String classPackage = getPackageName(enclosingElement);
             String className = getClassName(enclosingElement) + DynamicViewClass.CLASS_SUFFIX;
 
-            dynamicViewClass = new DynamicViewClass(classPackage, className, targetType);
+            dynamicViewClass = new DynamicViewClass(classPackage, className, enclosingElement);
             targetClassMap.put(enclosingElement, dynamicViewClass);
         }
         return dynamicViewClass;

@@ -1,26 +1,32 @@
 package com.benny.library.dynamicview.view;
 
+import android.util.Pair;
+
 import com.benny.library.dynamicview.property.DynamicProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ViewBinder {
-    private DynamicViewBuilder builder;
-    private DynamicProperties properties;
+    private List<Pair<DynamicViewBuilder, DynamicProperties>> pairs = new ArrayList<>();
 
-    public ViewBinder(DynamicViewBuilder builder, DynamicProperties properties) {
-        this.builder = builder;
-        this.properties = properties;
+    public void add(DynamicViewBuilder builder, DynamicProperties properties) {
+        pairs.add(Pair.create(builder, properties));
     }
 
-    public void bindView(JSONObject data) {
-        properties.set(builder, data);
+    public void bind(JSONObject data) {
+        for (Pair<DynamicViewBuilder, DynamicProperties> pair : pairs) {
+            pair.second.set(pair.first, data);
+        }
     }
 
-    public void bindView(Map<String, String> data) {
-        properties.set(builder, data);
+    public void bind(Map<String, String> data) {
+        for (Pair<DynamicViewBuilder, DynamicProperties> pair : pairs) {
+            pair.second.set(pair.first, data);
+        }
     }
 }

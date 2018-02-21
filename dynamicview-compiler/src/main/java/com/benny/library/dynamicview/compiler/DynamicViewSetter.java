@@ -4,6 +4,7 @@ import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.TypeName;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.type.TypeMirror;
 
 public class DynamicViewSetter {
     private String methodName;
@@ -27,10 +28,9 @@ public class DynamicViewSetter {
             return false;
         }
 
-        TypeName typeName = TypeName.get(executableElement.getParameters().get(0).asType());
-        if (!"java.lang.String".equals(typeName.toString())) {
-            return false;
-        }
-        return true;
+        TypeMirror type = executableElement.getParameters().get(0).asType();
+        return /*type.getKind().isPrimitive() ||*/ "java.lang.String".equals(TypeName.get(type).toString());
     }
+
+
 }
