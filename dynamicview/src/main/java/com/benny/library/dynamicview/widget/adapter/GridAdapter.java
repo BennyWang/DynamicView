@@ -1,6 +1,5 @@
 package com.benny.library.dynamicview.widget.adapter;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -33,9 +32,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
             ViewBinder viewBinder = new ViewBinder();
-            View view = viewCreator.createView(parent.getContext(), viewBinder);
-            parent.addView(view);
-
+            View view = viewCreator.createView(parent.getContext(), parent, viewBinder);
             view.setTag(viewBinder);
             return new ViewHolder(view);
         }

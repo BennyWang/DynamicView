@@ -1,15 +1,21 @@
 package com.benny.library.dynamicview.setter;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.os.Build;
 import android.view.View;
+import com.benny.library.dynamicview.property.BackgroundProperty;
 
-import com.benny.library.dynamicview.property.MarginProperty;
 
 public class BackgroundSetter {
     public static final String PROPERTY = "background";
 
-    public void setBackground(View view, String color) {
-        view.setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
+    public void setBackground(View view, String background) {
+        BackgroundProperty property = BackgroundProperty.of(view.getContext(), background);
+        view.setBackgroundDrawable(property.background);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (property.background instanceof ShapeDrawable) {
+                view.setClipToOutline(true);
+            }
+        }
     }
 }

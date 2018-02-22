@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = DynamicViewEngine.getInstance().createView(MainActivity.this, layoutXml);
+                convertView = DynamicViewEngine.getInstance().createView(MainActivity.this, null, layoutXml);
             }
             DynamicViewEngine.getInstance().bindView(convertView, getItem(position));
             return convertView;

@@ -74,10 +74,6 @@ public class DynamicViewClass {
 
     private void implementsGroupView(String typeName, TypeSpec.Builder result) {
         result.addSuperinterface(TypeVariableName.get(typeName));
-        MethodSpec.Builder addViewMethod = MethodSpec.methodBuilder("addView")
-                .addModifiers(PUBLIC)
-                .addParameter(TypeVariableName.get("android.view.View"), "view");
-        result.addMethod(addViewMethod.build());
     }
 
     private void implementsAdapterView(String typeName, TypeSpec.Builder result) {

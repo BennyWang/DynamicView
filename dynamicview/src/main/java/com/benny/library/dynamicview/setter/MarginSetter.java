@@ -15,8 +15,7 @@ public class MarginSetter {
         if (lparams == null) {
             lparams = new ViewGroup.MarginLayoutParams(WRAP_CONTENT, WRAP_CONTENT);
         }
-        MarginProperty property = MarginProperty.of(margin);
+        MarginProperty property = MarginProperty.of(view.getContext(), margin);
         lparams.setMargins(property.left, property.top, property.right, property.bottom);
-        view.setLayoutParams(lparams);
     }
 }

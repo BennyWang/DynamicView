@@ -42,24 +42,36 @@ public class DynamicProperties {
     }
 
     public void set(DynamicViewBuilder builder) {
-        for (Map.Entry<String, String> entry : staticProperties.entrySet()) {
-            builder.setProperty(entry.getKey(), entry.getValue());
+        try {
+            for (Map.Entry<String, String> entry : staticProperties.entrySet()) {
+                builder.setProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        catch (Exception ignored) {
         }
     }
 
     public void set(DynamicViewBuilder builder, Map<String, String> data) {
-        for (Map.Entry<String, String> entry : dynamicProperties.entrySet()) {
-            if (data.containsKey(entry.getValue())) {
-                builder.setProperty(entry.getKey(), data.get(entry.getValue()));
+        try {
+            for (Map.Entry<String, String> entry : dynamicProperties.entrySet()) {
+                if (data.containsKey(entry.getValue())) {
+                    builder.setProperty(entry.getKey(), data.get(entry.getValue()));
+                }
             }
+        }
+        catch (Exception ignored) {
         }
     }
 
     public void set(DynamicViewBuilder builder, JSONObject data) {
-        for (Map.Entry<String, String> entry : dynamicProperties.entrySet()) {
-            if (data.has(entry.getValue())) {
-                builder.setProperty(entry.getKey(), data.optString(entry.getValue()));
+        try {
+            for (Map.Entry<String, String> entry : dynamicProperties.entrySet()) {
+                if (data.has(entry.getValue())) {
+                    builder.setProperty(entry.getKey(), data.optString(entry.getValue()));
+                }
             }
+        }
+        catch (Exception ignored) {
         }
     }
 }

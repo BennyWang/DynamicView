@@ -2,6 +2,7 @@ package com.benny.library.dynamicview.parser;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.view.ViewBinder;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
@@ -22,9 +23,9 @@ public class DynamicViewTree {
         return root;
     }
 
-    public View createView(Context context) throws Exception {
+    public View createView(Context context, ViewGroup parent) throws Exception {
         ViewBinder viewBinder = new ViewBinder();
-        View contentView = root.createView(context, viewBinder);
+        View contentView = root.createView(context, parent, viewBinder);
         contentView.setTag(KEY_BINDERS, viewBinder);
         return contentView;
     }

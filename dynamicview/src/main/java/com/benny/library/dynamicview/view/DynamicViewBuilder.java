@@ -3,14 +3,18 @@ package com.benny.library.dynamicview.view;
 import android.view.View;
 
 import com.benny.library.dynamicview.setter.BackgroundSetter;
+import com.benny.library.dynamicview.setter.LayoutGravitySetter;
 import com.benny.library.dynamicview.setter.MarginSetter;
 import com.benny.library.dynamicview.setter.PaddingSetter;
+import com.benny.library.dynamicview.setter.SizeSetter;
 
 public abstract class DynamicViewBuilder {
     protected View view;
     private MarginSetter marginSetter = new MarginSetter();
     private PaddingSetter paddingSetter = new PaddingSetter();
     private BackgroundSetter backgroundSetter = new BackgroundSetter();
+    private SizeSetter sizeSetter = new SizeSetter();
+    private LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
 
     public boolean setProperty(String key, String value) {
         switch (key) {
@@ -23,6 +27,14 @@ public abstract class DynamicViewBuilder {
             case BackgroundSetter.PROPERTY:
                 backgroundSetter.setBackground(view, value);
                 return true;
+            case SizeSetter.PROPERTY_WIDTH:
+                sizeSetter.setSize(view, value, null);
+                return true;
+            case SizeSetter.PROPERTY_HEIGHT:
+                sizeSetter.setSize(view, null, value);
+                return true;
+            case LayoutGravitySetter.PROPERTY:
+                layoutGravitySetter.setGravity(view, value);
             default:
                 return false;
         }

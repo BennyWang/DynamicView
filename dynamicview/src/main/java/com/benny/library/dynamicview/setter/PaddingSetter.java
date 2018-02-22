@@ -11,7 +11,7 @@ public class PaddingSetter {
     public static final String PROPERTY = "padding";
 
     public void setPadding(View view, String padding) {
-        MarginProperty property = MarginProperty.of(padding);
+        MarginProperty property = MarginProperty.of(view.getContext(), padding);
         view.setPadding(property.left, property.top, property.right, property.bottom);
     }
 }

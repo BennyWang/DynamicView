@@ -5,7 +5,6 @@ public class ViewType {
     }
 
     public interface GroupView {
-        void addView(android.view.View view);
     }
 
     public interface AdapterView {

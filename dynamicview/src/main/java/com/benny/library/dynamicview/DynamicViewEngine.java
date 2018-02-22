@@ -3,6 +3,7 @@ package com.benny.library.dynamicview;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.parser.XMLLayoutParser;
 import com.benny.library.dynamicview.parser.DynamicViewTree;
@@ -32,14 +33,14 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
         }
     }
 
-    public View createView(Context context, String xml) {
+    public View createView(Context context, ViewGroup parent, String xml) {
         try {
             DynamicViewTree viewTree = parser.parseDocument(xml);
             String serialNumber = viewTree.getRoot().getProperty("sn");
             if (!viewTreeMap.containsKey(serialNumber)) {
                 viewTreeMap.put(serialNumber, viewTree);
             }
-            return viewTree.createView(context);
+            return viewTree.createView(context, parent);
         }
         catch (Exception e) {
             Log.e("DynamicViewEngine", "createView Exception: " + e);
