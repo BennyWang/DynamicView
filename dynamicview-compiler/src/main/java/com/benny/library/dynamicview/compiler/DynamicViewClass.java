@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 
 import static javax.lang.model.element.Modifier.FINAL;
 import static javax.lang.model.element.Modifier.PUBLIC;
@@ -21,11 +23,11 @@ public class DynamicViewClass {
 
     private final String classPackage;
     private final String className;
-    private final String targetClass;
+    private final TypeElement targetClass;
 
     private List<DynamicViewSetter> setters = new ArrayList<>();
 
-    public DynamicViewClass(String classPackage, String className, String targetClass) {
+    public DynamicViewClass(String classPackage, String className, TypeElement targetClass) {
         this.classPackage = classPackage;
         this.className = className;
         this.targetClass = targetClass;
@@ -40,6 +42,7 @@ public class DynamicViewClass {
                 .addModifiers(PUBLIC)
                 .superclass(TypeVariableName.get(BUILDER_CLASS));
 
+        implementsInterfaces(result);
         createTargetField(result);
         createConstructor(result);
         createSetMethod(result);
@@ -48,18 +51,62 @@ public class DynamicViewClass {
                 .build();
     }
 
+    private void implementsInterfaces(TypeSpec.Builder result) {
+        List<? extends TypeMirror> interfaces = targetClass.getInterfaces();
+        for (TypeMirror type : interfaces) {
+            String typeName = type.toString();
+            System.out.println("parse interface  = " + typeName);
+            if (typeName.endsWith(".ViewType.View")) {
+                implementsView(typeName, result);
+            }
+            else if (typeName.endsWith(".ViewType.GroupView")) {
+                implementsGroupView(typeName, result);
+            }
+            else if (typeName.endsWith(".ViewType.AdapterView")) {
+                implementsAdapterView(typeName, result);
+            }
+        }
+    }
+
+    private void implementsView(String typeName, TypeSpec.Builder result) {
+        result.addSuperinterface(TypeVariableName.get(typeName));
+    }
+
+    private void implementsGroupView(String typeName, TypeSpec.Builder result) {
+        result.addSuperinterface(TypeVariableName.get(typeName));
+        MethodSpec.Builder addViewMethod = MethodSpec.methodBuilder("addView")
+                .addModifiers(PUBLIC)
+                .addParameter(TypeVariableName.get("android.view.View"), "view");
+        result.addMethod(addViewMethod.build());
+    }
+
+    private void implementsAdapterView(String typeName, TypeSpec.Builder result) {
+        result.addSuperinterface(TypeVariableName.get(typeName));
+        MethodSpec.Builder setViewCreatorMethod = MethodSpec.methodBuilder("setViewCreator")
+                .addModifiers(PUBLIC)
+                .addParameter(TypeVariableName.get("com.benny.library.dynamicview.view.ViewCreator"), "viewCreator");
+        result.addMethod(setViewCreatorMethod.build());
+
+        MethodSpec.Builder setDataSourceMethod = MethodSpec.methodBuilder("setDataSource")
+                .addModifiers(PUBLIC)
+                .addParameter(String.class, "dataSource");
+        result.addMethod(setDataSourceMethod.build());
+    }
+
     private void createTargetField(TypeSpec.Builder result) {
-        FieldSpec target = FieldSpec.builder(TypeVariableName.get(targetClass), "target")
+        String targetClassName = targetClass.getQualifiedName().toString();
+        FieldSpec target = FieldSpec.builder(TypeVariableName.get(targetClassName), "target")
                 .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
                 .build();
         result.addField(target);
     }
 
     private void createConstructor(TypeSpec.Builder result) {
+        String targetClassName = targetClass.getQualifiedName().toString();
         MethodSpec constructor = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(TypeVariableName.get("android.content.Context"), "context")
-                .addStatement("this.target = new $N(context)", targetClass)
+                .addStatement("this.target = new $N(context)", targetClassName)
                 .addStatement("this.view = this.target")
                 .build();
         result.addMethod(constructor);

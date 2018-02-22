@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.benny.library.dynamicview.parser.XMLLayoutParser;
-import com.benny.library.dynamicview.view.DynamicViewTree;
+import com.benny.library.dynamicview.parser.DynamicViewTree;
 
 import org.json.JSONObject;
 
@@ -41,7 +41,8 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
             }
             return viewTree.createView(context);
         }
-        catch (Exception ignored) {
+        catch (Exception e) {
+            Log.e("DynamicViewEngine", "createView Exception: " + e);
             return null;
         }
     }

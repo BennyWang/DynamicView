@@ -1,19 +1,18 @@
 package com.benny.app.dynamicview.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.benny.app.dynamicview.R;
 import com.benny.library.dynamicview.annotations.DynamicView;
+import com.benny.library.dynamicview.view.ViewType;
 import com.bumptech.glide.Glide;
 
 @DynamicView
-public class TitleView extends RelativeLayout {
+public class TitleView extends RelativeLayout implements ViewType.View {
     private ImageView vLogo;
     private TextView vTitle;
 

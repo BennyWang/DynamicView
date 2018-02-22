@@ -24,7 +24,21 @@ public class DynamicProperties {
     }
 
     public String get(String key) {
-        return  staticProperties.containsKey(key) ? staticProperties.get(key) : dynamicProperties.get(key);
+        return staticProperties.get(key);
+    }
+
+    public int getInt(String key, int defaultValue) {
+         String value = staticProperties.get(key);
+         if (TextUtils.isEmpty(value)) {
+             return defaultValue;
+         }
+
+         try {
+             return Integer.parseInt(value);
+         }
+         catch (Exception e) {
+             return defaultValue;
+         }
     }
 
     public void set(DynamicViewBuilder builder) {
