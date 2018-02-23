@@ -21,38 +21,35 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
         return LazyHolder.INSTANCE;
     }
 
-    public void compile(String xml) {
-        try {
-            DynamicViewTree viewTree = parser.parseDocument(xml);
-            String serialNumber = viewTree.getRoot().getProperty("sn");
-            if (!viewTreeMap.containsKey(serialNumber)) {
-                viewTreeMap.put(serialNumber, viewTree);
-            }
+    public DynamicViewTree compile(String xml) throws Exception {
+        DynamicViewTree viewTree = parser.parseDocument(xml);
+        String serialNumber = viewTree.getRoot().getProperty("sn");
+        if (!viewTreeMap.containsKey(serialNumber)) {
+            viewTreeMap.put(serialNumber, viewTree);
         }
-        catch (Exception ignored) {
-        }
+        return viewTree;
     }
 
-    public View createView(Context context, ViewGroup parent, String xml) {
+    public View inflate(Context context, ViewGroup parent, String xml) {
+        long tick = System.currentTimeMillis();
         try {
-            DynamicViewTree viewTree = parser.parseDocument(xml);
-            String serialNumber = viewTree.getRoot().getProperty("sn");
-            if (!viewTreeMap.containsKey(serialNumber)) {
-                viewTreeMap.put(serialNumber, viewTree);
-            }
-            return viewTree.createView(context, parent);
+            DynamicViewTree viewTree = compile(xml);
+            return viewTree.inflate(context, parent);
         }
         catch (Exception e) {
-            Log.e("DynamicViewEngine", "createView Exception: " + e);
+            Log.e("DynamicViewEngine", "inflate Exception: " + e);
             return null;
+        }
+        finally {
+            Log.i("DynamicViewEngine", "inflate cost " + (System.currentTimeMillis() - tick));
         }
     }
 
-    public void bindView(View view, Map<String, String> data) {
+    public static void bindView(View view, Map<String, String> data) {
         DynamicViewTree.bindView(view, data);
     }
 
-    public void bindView(View view, JSONObject data) {
+    public static void bindView(View view, JSONObject data) {
         DynamicViewTree.bindView(view, data);
     }
 

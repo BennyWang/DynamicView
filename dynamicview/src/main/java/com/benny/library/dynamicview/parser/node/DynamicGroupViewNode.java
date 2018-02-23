@@ -5,16 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.view.ViewBinder;
-import com.benny.library.dynamicview.view.ViewCreator;
-import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.property.DynamicProperties;
-import com.benny.library.dynamicview.view.DynamicViewBuilder;
-import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicGroupViewNode extends DynamicViewNode implements ViewCreator {
+public class DynamicGroupViewNode extends DynamicViewNode {
     private List<DynamicViewNode> children = new ArrayList<>();
 
     public DynamicGroupViewNode(String className, DynamicProperties properties) {

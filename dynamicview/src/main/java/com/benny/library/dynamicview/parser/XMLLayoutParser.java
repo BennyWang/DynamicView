@@ -26,7 +26,7 @@ public class XMLLayoutParser {
         }
     }
 
-    public DynamicViewTree parseDocument(String xml) throws Exception {
+    public synchronized DynamicViewTree parseDocument(String xml) throws Exception {
         parser.setInput(new StringReader(xml));
         DynamicViewNode currentNode = null;
         for (int event; (event = parser.getEventType()) != XmlPullParser.END_DOCUMENT; ) {

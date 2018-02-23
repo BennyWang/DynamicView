@@ -1,5 +1,6 @@
 package com.benny.library.dynamicview.view;
 
+import android.content.Context;
 import android.view.View;
 
 import com.benny.library.dynamicview.setter.BackgroundSetter;
@@ -17,6 +18,12 @@ public abstract class DynamicViewBuilder {
     private SizeSetter sizeSetter = new SizeSetter();
     private LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
     private WeightSetter weightSetter = new WeightSetter();
+
+    abstract public void createView(Context context);
+
+    public View getView() {
+        return view;
+    }
 
     public boolean setProperty(String key, String value) {
         switch (key) {
@@ -43,9 +50,5 @@ public abstract class DynamicViewBuilder {
             default:
                 return false;
         }
-    }
-
-    public View getView() {
-        return view;
     }
 }

@@ -9,8 +9,6 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.LruCache;
 
 public class BackgroundProperty {
-    private static LruCache<String, BackgroundProperty> cache = new LruCache<>(10);
-
     public Drawable background;
 
     /**
@@ -20,12 +18,7 @@ public class BackgroundProperty {
      *                color  radius
      */
     public static BackgroundProperty of(Context context, String value) {
-        BackgroundProperty property = cache.get(value);
-        if (property == null) {
-            property = new BackgroundProperty(context, value);
-            cache.put(value, property);
-        }
-        return property;
+        return new BackgroundProperty(context, value);
     }
 
     private BackgroundProperty(Context context, String value) {

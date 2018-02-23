@@ -44,7 +44,7 @@ public class DynamicViewClass {
 
         implementsInterfaces(result);
         createTargetField(result);
-        createConstructor(result);
+        createViewMethod(result);
         createSetMethod(result);
         return JavaFile.builder(classPackage, result.build())
                 .addFileComment("Generated code from DynamicView. Do not modify!")
@@ -77,9 +77,9 @@ public class DynamicViewClass {
 
     private void implementsAdapterView(String typeName, TypeSpec.Builder result) {
         result.addSuperinterface(TypeVariableName.get(typeName));
-        MethodSpec.Builder setViewCreatorMethod = MethodSpec.methodBuilder("setViewCreator")
+        MethodSpec.Builder setViewCreatorMethod = MethodSpec.methodBuilder("setInflater")
                 .addModifiers(PUBLIC)
-                .addParameter(TypeVariableName.get("com.benny.library.dynamicview.view.ViewCreator"), "viewCreator");
+                .addParameter(TypeVariableName.get("com.benny.library.dynamicview.view.ViewInflater"), "inflater");
         result.addMethod(setViewCreatorMethod.build());
 
         MethodSpec.Builder setDataSourceMethod = MethodSpec.methodBuilder("setDataSource")
@@ -91,20 +91,21 @@ public class DynamicViewClass {
     private void createTargetField(TypeSpec.Builder result) {
         String targetClassName = targetClass.getQualifiedName().toString();
         FieldSpec target = FieldSpec.builder(TypeVariableName.get(targetClassName), "target")
-                .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
+                .addModifiers(Modifier.PRIVATE)
                 .build();
         result.addField(target);
     }
 
-    private void createConstructor(TypeSpec.Builder result) {
+    private void createViewMethod(TypeSpec.Builder result) {
         String targetClassName = targetClass.getQualifiedName().toString();
-        MethodSpec constructor = MethodSpec.constructorBuilder()
+        MethodSpec.Builder constructor = MethodSpec.methodBuilder("createView")
                 .addModifiers(Modifier.PUBLIC)
                 .addParameter(TypeVariableName.get("android.content.Context"), "context")
+                //.addStatement("long tick = System.currentTimeMillis()", targetClassName)
                 .addStatement("this.target = new $N(context)", targetClassName)
-                .addStatement("this.view = this.target")
-                .build();
-        result.addMethod(constructor);
+                .addStatement("this.view = this.target");
+                //.addStatement("android.util.Log.i(\"DynamicViewEngine\", \"create view of $L cost \" + (System.currentTimeMillis() - tick))", className);
+        result.addMethod(constructor.build());
     }
 
     private void createSetMethod(TypeSpec.Builder result) {

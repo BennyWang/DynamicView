@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.view.ViewBinder;
-import com.benny.library.dynamicview.view.ViewCreator;
+import com.benny.library.dynamicview.DynamicViewEngine;
+import com.benny.library.dynamicview.view.ViewInflater;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private JSONArray dataSource = new JSONArray();
-    private ViewCreator viewCreator;
+    private ViewInflater inflater;
 
     public void setDataSource(String source) {
         try {
@@ -24,16 +24,14 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void setViewCreator(ViewCreator viewCreator) {
-        this.viewCreator = viewCreator;
+    public void setInflater(ViewInflater inflater) {
+        this.inflater = inflater;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
-            ViewBinder viewBinder = new ViewBinder();
-            View view = viewCreator.createView(parent.getContext(), parent, viewBinder);
-            view.setTag(viewBinder);
+            View view = inflater.inflate(parent.getContext(), parent);
             return new ViewHolder(view);
         }
         catch (Exception e) {
@@ -49,7 +47,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return viewCreator == null || dataSource.length() == 0 ? 0 : dataSource.length();
+        return inflater == null || dataSource.length() == 0 ? 0 : dataSource.length();
     }
 
     public JSONObject getItem(int position) {
@@ -66,7 +64,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         void notifyDataChange(JSONObject data) {
-            ((ViewBinder)itemView.getTag()).bind(data);
+            DynamicViewEngine.bindView(itemView, data);
         }
     }
 }

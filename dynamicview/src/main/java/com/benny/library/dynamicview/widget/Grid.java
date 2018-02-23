@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.benny.library.dynamicview.annotations.DynamicView;
-import com.benny.library.dynamicview.view.ViewCreator;
+import com.benny.library.dynamicview.view.ViewInflater;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.widget.adapter.GridAdapter;
 
@@ -45,7 +45,7 @@ public class Grid extends RecyclerView implements ViewType.AdapterView {
     }
 
     @Override
-    public void setViewCreator(ViewCreator viewCreator) {
-        adapter.setViewCreator(viewCreator);
+    public void setInflater(ViewInflater inflater) {
+        adapter.setInflater(inflater);
     }
 }

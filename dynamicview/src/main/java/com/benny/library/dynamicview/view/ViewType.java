@@ -9,6 +9,6 @@ public class ViewType {
 
     public interface AdapterView {
         void setDataSource(String source);
-        void setViewCreator(ViewCreator viewCreator);
+        void setInflater(ViewInflater inflater);
     }
 }

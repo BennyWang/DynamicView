@@ -4,15 +4,15 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.benny.library.dynamicview.parser.DynamicViewTree;
 import com.benny.library.dynamicview.view.ViewBinder;
-import com.benny.library.dynamicview.view.ViewCreator;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.property.DynamicProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicAdapterViewNode extends DynamicViewNode implements ViewCreator {
+public class DynamicAdapterViewNode extends DynamicViewNode {
     private List<DynamicViewNode> children = new ArrayList<>();
 
     public DynamicAdapterViewNode(String className, DynamicProperties properties) {
@@ -29,11 +29,10 @@ public class DynamicAdapterViewNode extends DynamicViewNode implements ViewCreat
         children.add(child);
     }
 
-    @Override
     public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
         View view = super.createView(context, parent, viewBinder);
         if (children.size() > 0) {
-            ((ViewType.AdapterView) view).setViewCreator(children.get(0));
+            ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(children.get(0)));
         }
         return view;
     }

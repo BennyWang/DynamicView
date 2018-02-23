@@ -1,16 +1,16 @@
 package com.benny.library.dynamicview.parser.node;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.view.ViewCreator;
 import com.benny.library.dynamicview.property.DynamicProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
 import com.benny.library.dynamicview.view.ViewBinder;
 
-public class DynamicViewNode implements ViewCreator {
+public class DynamicViewNode {
     private DynamicViewNode parent;
 
     protected String name;
@@ -19,6 +19,7 @@ public class DynamicViewNode implements ViewCreator {
     public DynamicViewNode(String className, DynamicProperties properties) {
         this.name = className;
         this.properties = properties;
+        registerNode();
     }
 
     public boolean isRoot() {
@@ -53,7 +54,17 @@ public class DynamicViewNode implements ViewCreator {
         }
 
         viewBinder.add(builder, properties);
+        long tick = System.currentTimeMillis();
         properties.set(builder);
+        Log.i("DynamicViewEngine", "set static property of " + name + " cost " + (System.currentTimeMillis() - tick));
         return builder.getView();
+    }
+
+    private void registerNode() {
+        try {
+            DynamicViewBuilderFactory.register(name);
+        }
+        catch (Exception ignored) {
+        }
     }
 }
