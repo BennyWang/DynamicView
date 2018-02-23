@@ -6,7 +6,7 @@ import android.util.LruCache;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.benny.library.dynamicview.property.PropertyUtils.dpToPx;
+import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
 
 public class SizeProperty {
     private static LruCache<String, SizeProperty> cache = new LruCache<>(10);

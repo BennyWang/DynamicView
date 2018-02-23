@@ -3,7 +3,7 @@ package com.benny.library.dynamicview.property;
 import android.content.Context;
 import android.util.LruCache;
 
-import static com.benny.library.dynamicview.property.PropertyUtils.dpToPx;
+import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
 
 public class RadiusProperty {
     private static LruCache<String, RadiusProperty> cache = new LruCache<>(10);
@@ -35,7 +35,7 @@ public class RadiusProperty {
                 topLeft = radius[0];
                 topRight = radius[1];
                 bottomRight = radius[2];
-                bottomLeft = radius.length == 3 ? 0 : radius[4];
+                bottomLeft = radius.length == 3 ? 0 : radius[3];
                 break;
         }
     }

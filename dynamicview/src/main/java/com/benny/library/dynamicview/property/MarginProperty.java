@@ -3,7 +3,7 @@ package com.benny.library.dynamicview.property;
 import android.content.Context;
 import android.util.LruCache;
 
-import static com.benny.library.dynamicview.property.PropertyUtils.dpToPx;
+import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
 
 public class MarginProperty {
     private static LruCache<String, MarginProperty> cache = new LruCache<>(10);
@@ -35,7 +35,7 @@ public class MarginProperty {
                 left = intMargins[0];
                 top = intMargins[1];
                 right = intMargins[2];
-                bottom = intMargins.length == 3 ? 0 : intMargins[4];
+                bottom = intMargins.length == 3 ? 0 : intMargins[3];
                 break;
         }
     }

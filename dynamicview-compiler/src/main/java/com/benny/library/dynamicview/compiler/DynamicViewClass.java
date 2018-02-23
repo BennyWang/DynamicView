@@ -55,7 +55,6 @@ public class DynamicViewClass {
         List<? extends TypeMirror> interfaces = targetClass.getInterfaces();
         for (TypeMirror type : interfaces) {
             String typeName = type.toString();
-            System.out.println("parse interface  = " + typeName);
             if (typeName.endsWith(".ViewType.View")) {
                 implementsView(typeName, result);
             }

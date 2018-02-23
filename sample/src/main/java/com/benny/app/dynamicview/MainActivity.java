@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.benny.library.dynamicview.DynamicViewEngine;
+import com.benny.library.dynamicview.widget.Image;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,19 +19,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView vContainer;
+    private LinearLayout vContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
     }
 
     private void initView() {
+        Image.setImageLoader(new GlideImageLoader());
         vContainer = findViewById(R.id.container);
-        vContainer.setAdapter(new MyAdapter());
+
+        String xml = "<RBox sn=\"12345678\"><Image src=\"{logo}\" width=\"100\" height=\"100\"/><Text text=\"{title}\" padding=\"30\" gravity=\"center|end\" background=\"red 10\"/></RBox>";
+        View view = DynamicViewEngine.getInstance().createView(MainActivity.this, null, xml);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("title", "Hello World");
+        map.put("logo", "http://avatar.csdn.net/8/B/B/1_sinyu890807.jpg");
+        DynamicViewEngine.getInstance().bindView(view, map);
+        vContainer.addView(view);
     }
 
     private class MyAdapter extends BaseAdapter {

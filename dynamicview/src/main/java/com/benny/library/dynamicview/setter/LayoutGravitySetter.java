@@ -13,13 +13,14 @@ public class LayoutGravitySetter {
     public static final String PROPERTY = "gravity";
 
     public void setGravity(View view, String value) {
-        GravityProperty property = GravityProperty.of(view.getContext(), value);
         ViewGroup.LayoutParams lparams = view.getLayoutParams();
-        if (lparams instanceof LinearLayout.LayoutParams) {
-            ((LinearLayout.LayoutParams) lparams).gravity = property.gravity;
-        }
-        else if (lparams instanceof RelativeLayout.LayoutParams) {
-            setRelativeLayoutGravity((RelativeLayout.LayoutParams) lparams, property.gravity);
+        if (lparams != null) {
+            GravityProperty property = GravityProperty.of(view.getContext(), value);
+            if (lparams instanceof LinearLayout.LayoutParams) {
+                ((LinearLayout.LayoutParams) lparams).gravity = property.gravity;
+            } else if (lparams instanceof RelativeLayout.LayoutParams) {
+                setRelativeLayoutGravity((RelativeLayout.LayoutParams) lparams, property.gravity);
+            }
         }
     }
 

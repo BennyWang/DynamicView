@@ -1,4 +1,4 @@
-package com.benny.library.dynamicview.property;
+package com.benny.library.dynamicview.util;
 
 import android.content.Context;
 

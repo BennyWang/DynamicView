@@ -7,6 +7,7 @@ import com.benny.library.dynamicview.setter.LayoutGravitySetter;
 import com.benny.library.dynamicview.setter.MarginSetter;
 import com.benny.library.dynamicview.setter.PaddingSetter;
 import com.benny.library.dynamicview.setter.SizeSetter;
+import com.benny.library.dynamicview.setter.WeightSetter;
 
 public abstract class DynamicViewBuilder {
     protected View view;
@@ -15,6 +16,7 @@ public abstract class DynamicViewBuilder {
     private BackgroundSetter backgroundSetter = new BackgroundSetter();
     private SizeSetter sizeSetter = new SizeSetter();
     private LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
+    private WeightSetter weightSetter = new WeightSetter();
 
     public boolean setProperty(String key, String value) {
         switch (key) {
@@ -35,6 +37,9 @@ public abstract class DynamicViewBuilder {
                 return true;
             case LayoutGravitySetter.PROPERTY:
                 layoutGravitySetter.setGravity(view, value);
+            case WeightSetter.PROPERTY:
+                weightSetter.setWeight(view, value);
+                return true;
             default:
                 return false;
         }
