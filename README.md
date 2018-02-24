@@ -147,7 +147,12 @@ Grid节点只能有一个子节点，此节点可以理解成子控件的模版�
 
 ### 使用方法
 
+```gradle
+compile 'com.benny.library:dynamicview:0.0.2'
+annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.2'
+```
 ```java
+
 // 创建View，第一个参数是Context，第二个是包含xml的字符串
 View convertView = DynamicViewEngine.getInstance().inflate(context, parent, layoutXml);
 // 绑定动态属性，第一个参数是通过上面方法创建的view，第二个值是数据，Map<String, String> 或者 JSONObject
