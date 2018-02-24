@@ -16,9 +16,9 @@ public class ViewDefinitions {
         StringBuilder builder = new StringBuilder();
         builder.append("<RBox sn='000001'>");
         builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>");
-        builder.append("<Text text='{title}' size='20' color='black'/>");
+        builder.append("<Text text='{title}' fontSize='20' color='black'/>");
         builder.append("<Text text='金额' margin='0 10 0 0'/>");
-        builder.append("<HBox><Text text='{money}' size='28' color='black'/><Text text='元'/></HBox>");
+        builder.append("<RBox><Text name='money' text='{money}' fontSize='28' color='black'/><Text rightOf='@money' alignBaseline='@money' text='元'/></RBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
         builder.append("<VBox margin='0 10 0 0'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
         builder.append("</Grid>");
@@ -30,10 +30,10 @@ public class ViewDefinitions {
 
         builder = new StringBuilder();
         builder.append("<RBox sn='000002'>");
-        builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14' width='match'>");
+        builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14' size='match wrap'>");
         builder.append("<Text text='{title}' color='black'/>");
         builder.append("<Text text='还款金额' margin='0 10 0 0'/>");
-        builder.append("<HBox><Text text='{money}' size='28' color='black'/><Text text='人民币'/></HBox>");
+        builder.append("<HBox><Text text='{money}' fontSize='28' color='black'/><Text text='人民币'/></HBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
         builder.append("<VBox margin='0 10 0 0'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
         builder.append("</Grid>");

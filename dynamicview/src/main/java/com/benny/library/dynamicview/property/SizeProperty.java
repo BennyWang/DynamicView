@@ -11,30 +11,43 @@ import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
 public class SizeProperty {
     private static LruCache<String, SizeProperty> cache = new LruCache<>(10);
 
-    public int size = MATCH_PARENT;
+    public int width = WRAP_CONTENT;
+    public int height = WRAP_CONTENT;
 
     public static SizeProperty of(Context context, String value) {
-        SizeProperty property = cache.get(value);
+        String trimValue = value.trim();
+        SizeProperty property = cache.get(trimValue);
         if (property == null) {
-            property = new SizeProperty(context, value);
-            cache.put(value, property);
+            property = new SizeProperty(context, trimValue);
+            cache.put(trimValue, property);
         }
         return property;
     }
 
     private SizeProperty(Context context, String value) {
-        if ("wrap".equals(value)) {
-            size = WRAP_CONTENT;
-        }
-        else if ("match".equals(value)) {
-            size = MATCH_PARENT;
+        String[] parts = value.split("\\s+");
+        if (parts.length == 1) {
+            width = height = parseSize(context, parts[0]);
         }
         else {
-            try {
-                size = dpToPx(context, Integer.parseInt(value));
-            }
-            catch (Exception ignored) {
-            }
+            width = parseSize(context, parts[0]);
+            height = parseSize(context, parts[1]);
+        }
+    }
+
+    public int parseSize(Context context, String value) {
+        if ("wrap".equals(value)) {
+            return WRAP_CONTENT;
+        }
+        else if ("match".equals(value)) {
+            return MATCH_PARENT;
+        }
+
+        try {
+            return dpToPx(context, Integer.parseInt(value));
+        }
+        catch (Exception ignored) {
+            return WRAP_CONTENT;
         }
     }
 }

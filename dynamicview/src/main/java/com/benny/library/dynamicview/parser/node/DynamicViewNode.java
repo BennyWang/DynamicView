@@ -1,7 +1,6 @@
 package com.benny.library.dynamicview.parser.node;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,7 +18,6 @@ public class DynamicViewNode {
     public DynamicViewNode(String className, DynamicProperties properties) {
         this.name = className;
         this.properties = properties;
-        registerNode();
     }
 
     public boolean isRoot() {
@@ -38,10 +36,6 @@ public class DynamicViewNode {
         return properties.get(key);
     }
 
-    public int getIntProperty(String key, int defaultValue) {
-        return properties.getInt(key, defaultValue);
-    }
-
     public void addChild(DynamicViewNode child) {
         throw new RuntimeException("View node " + name + " dose not allow add child");
     }
@@ -56,13 +50,5 @@ public class DynamicViewNode {
         viewBinder.add(builder, properties);
         properties.set(builder);
         return builder.getView();
-    }
-
-    private void registerNode() {
-        try {
-            DynamicViewBuilderFactory.register(name);
-        }
-        catch (Exception ignored) {
-        }
     }
 }

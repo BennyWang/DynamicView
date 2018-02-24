@@ -7,11 +7,13 @@ import com.benny.library.dynamicview.setter.BackgroundSetter;
 import com.benny.library.dynamicview.setter.LayoutGravitySetter;
 import com.benny.library.dynamicview.setter.MarginSetter;
 import com.benny.library.dynamicview.setter.PaddingSetter;
+import com.benny.library.dynamicview.setter.RelativeSetter;
 import com.benny.library.dynamicview.setter.SizeSetter;
 import com.benny.library.dynamicview.setter.WeightSetter;
 
 public abstract class DynamicViewBuilder {
     protected View view;
+    private RelativeSetter relativeSetter = new RelativeSetter();
     private MarginSetter marginSetter = new MarginSetter();
     private PaddingSetter paddingSetter = new PaddingSetter();
     private BackgroundSetter backgroundSetter = new BackgroundSetter();
@@ -27,6 +29,9 @@ public abstract class DynamicViewBuilder {
 
     public boolean setProperty(String key, String value) {
         switch (key) {
+            case "id":
+                view.setId(Integer.parseInt(value));
+                break;
             case MarginSetter.PROPERTY:
                 marginSetter.setMargin(view, value);
                 return true;
@@ -36,11 +41,8 @@ public abstract class DynamicViewBuilder {
             case BackgroundSetter.PROPERTY:
                 backgroundSetter.setBackground(view, value);
                 return true;
-            case SizeSetter.PROPERTY_WIDTH:
-                sizeSetter.setSize(view, value, null);
-                return true;
-            case SizeSetter.PROPERTY_HEIGHT:
-                sizeSetter.setSize(view, null, value);
+            case SizeSetter.PROPERTY:
+                sizeSetter.setSize(view, value);
                 return true;
             case LayoutGravitySetter.PROPERTY:
                 layoutGravitySetter.setGravity(view, value);
@@ -48,7 +50,11 @@ public abstract class DynamicViewBuilder {
                 weightSetter.setWeight(view, value);
                 return true;
             default:
-                return false;
+                if (relativeSetter.canHandle(key)) {
+                    relativeSetter.set(view, key, value);
+                    return true;
+                }
         }
+        return false;
     }
 }

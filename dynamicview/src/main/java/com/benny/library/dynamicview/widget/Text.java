@@ -20,7 +20,7 @@ public class Text extends TextView implements ViewType.View {
         super.setText(text);
     }
 
-    public void setSize(String value) {
+    public void setFontSize(String value) {
         setTextSize(Integer.parseInt(value));
     }
 
