@@ -1,7 +1,6 @@
 package com.benny.library.dynamicview.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.LruCache;
 
 public class DynamicViewBuilderFactory {
@@ -12,9 +11,7 @@ public class DynamicViewBuilderFactory {
         Class<?> clazz = register(name);
         DynamicViewBuilder builder = (DynamicViewBuilder) clazz.newInstance();
 
-        long tick = System.currentTimeMillis();
         builder.createView(context);
-        Log.i("DynamicViewEngine", "create view of " + name + " cost " + (System.currentTimeMillis() - tick));
         return builder;
     }
 

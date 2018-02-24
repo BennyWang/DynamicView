@@ -54,9 +54,7 @@ public class DynamicViewNode {
         }
 
         viewBinder.add(builder, properties);
-        long tick = System.currentTimeMillis();
         properties.set(builder);
-        Log.i("DynamicViewEngine", "set static property of " + name + " cost " + (System.currentTimeMillis() - tick));
         return builder.getView();
     }
 

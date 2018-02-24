@@ -7,19 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 
 import com.benny.library.dynamicview.DynamicViewEngine;
 import com.benny.library.dynamicview.widget.Image;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private LinearLayout vContainer;
+    private ListView vContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Image.setImageLoader(new GlideImageLoader());
         vContainer = findViewById(R.id.container);
 
-        inflateViews();
-        inflateAdapterViews();
+        vContainer.setAdapter(new DynamicViewAdapter());
     }
 
     private void inflateViews() {
@@ -75,6 +76,49 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         catch (Exception ignored) {
+        }
+    }
+
+    public class DynamicViewAdapter extends BaseAdapter {
+        List<ViewDefinitions.ViewDefinition> viewDefinitions;
+
+        public DynamicViewAdapter() {
+            viewDefinitions = ViewDefinitions.getViews();
+        }
+
+        @Override
+        public int getCount() {
+            return viewDefinitions.size();
+        }
+
+        @Override
+        public ViewDefinitions.ViewDefinition getItem(int position) {
+            return viewDefinitions.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewDefinitions.ViewDefinition viewDefinition = getItem(position);
+            if (convertView == null) {
+                convertView = DynamicViewEngine.getInstance().inflate(MainActivity.this, null, viewDefinition.layout);
+            }
+            DynamicViewEngine.bindView(convertView, viewDefinition.data);
+            return convertView;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 10;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return getItem(position).viewType;
         }
     }
 }
