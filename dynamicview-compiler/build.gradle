@@ -1,4 +1,4 @@
-apply plugin: 'java-library'
+apply plugin: 'java'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,3 +8,10 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+ext.projectName         = "DynamicView-Compiler"
+ext.projectDescription  = "DynamicView Annotation Processor"
+ext.projectGroupId      = "com.benny.library"
+ext.projectArtifactId   = "DynamicView-Compiler"
+
+apply from: rootProject.file('gradle/bintrayUpload.gradle')

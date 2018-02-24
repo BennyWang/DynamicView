@@ -1,6 +1,4 @@
-package com.benny.library.dynamicview.parser;
-
-import android.view.View;
+package com.benny.library.dynamicview.property;
 
 import java.util.HashMap;
 import java.util.Map;

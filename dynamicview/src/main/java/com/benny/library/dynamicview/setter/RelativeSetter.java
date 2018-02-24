@@ -5,9 +5,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class RelativeSetter {
     private static final String LEFT_OF = "leftOf";

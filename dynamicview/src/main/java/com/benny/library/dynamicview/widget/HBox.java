@@ -1,7 +1,6 @@
 package com.benny.library.dynamicview.widget;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.widget.LinearLayout;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
