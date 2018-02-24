@@ -2,15 +2,17 @@ package com.benny.library.dynamicview.parser;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.view.ViewBinder;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
+import com.benny.library.dynamicview.view.ViewInflater;
 
 import org.json.JSONObject;
 
 import java.util.Map;
 
-public class DynamicViewTree {
+public class DynamicViewTree implements ViewInflater {
     private static final int KEY_BINDERS = 1 + 2 << 24;
     private DynamicViewNode root;
 
@@ -22,9 +24,9 @@ public class DynamicViewTree {
         return root;
     }
 
-    public View createView(Context context) throws Exception {
+    public View inflate(Context context, ViewGroup parent) throws Exception {
         ViewBinder viewBinder = new ViewBinder();
-        View contentView = root.createView(context, viewBinder);
+        View contentView = root.createView(context, parent, viewBinder);
         contentView.setTag(KEY_BINDERS, viewBinder);
         return contentView;
     }

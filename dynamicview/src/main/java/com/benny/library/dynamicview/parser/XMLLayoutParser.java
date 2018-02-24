@@ -26,12 +26,14 @@ public class XMLLayoutParser {
         }
     }
 
-    public DynamicViewTree parseDocument(String xml) throws Exception {
+    public synchronized DynamicViewTree parseDocument(String xml) throws Exception {
+        ViewIdGenerator viewIdGenerator = new ViewIdGenerator();
+
         parser.setInput(new StringReader(xml));
         DynamicViewNode currentNode = null;
         for (int event; (event = parser.getEventType()) != XmlPullParser.END_DOCUMENT; ) {
             if (event == XmlPullParser.START_TAG) {
-                DynamicViewNode viewNode = parseNode(parser);
+                DynamicViewNode viewNode = parseNode(parser, viewIdGenerator);
                 if (currentNode != null) {
                     currentNode.addChild(viewNode);
                 }
@@ -58,14 +60,14 @@ public class XMLLayoutParser {
         return new DynamicViewTree(currentNode);
     }
 
-    private DynamicViewNode parseNode(XmlPullParser parser) throws Exception {
+    private DynamicViewNode parseNode(XmlPullParser parser, ViewIdGenerator viewIdGenerator) throws Exception {
         String className = parser.getName();
-        DynamicProperties properties = parseAttributes(parser);
+        DynamicProperties properties = parseAttributes(parser, viewIdGenerator);
         return DynamicNodeFactory.create(className, properties);
     }
 
-    private DynamicProperties parseAttributes(XmlPullParser parser) {
-        DynamicProperties properties = new DynamicProperties();
+    private DynamicProperties parseAttributes(XmlPullParser parser, ViewIdGenerator viewIdGenerator) {
+        DynamicProperties properties = new DynamicProperties(viewIdGenerator);
         int attrCount = parser.getAttributeCount();
         for (int i = 0; i < attrCount; ++i) {
             properties.add(parser.getAttributeName(i), parser.getAttributeValue(i));

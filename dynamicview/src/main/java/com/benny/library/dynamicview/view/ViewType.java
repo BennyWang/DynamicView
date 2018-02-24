@@ -5,11 +5,10 @@ public class ViewType {
     }
 
     public interface GroupView {
-        void addView(android.view.View view);
     }
 
     public interface AdapterView {
         void setDataSource(String source);
-        void setViewCreator(ViewCreator viewCreator);
+        void setInflater(ViewInflater inflater);
     }
 }

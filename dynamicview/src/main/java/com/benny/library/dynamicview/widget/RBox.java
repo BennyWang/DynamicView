@@ -1,18 +1,16 @@
 package com.benny.library.dynamicview.widget;
 
 import android.content.Context;
-import android.view.Gravity;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
 import com.benny.library.dynamicview.property.GravityProperty;
 import com.benny.library.dynamicview.view.ViewType;
 
 @DynamicView
-public class HBox extends LinearLayout implements ViewType.GroupView {
-    public HBox(Context context) {
+public class RBox extends RelativeLayout implements ViewType.GroupView {
+    public RBox(Context context) {
         super(context);
-        setOrientation(HORIZONTAL);
     }
 
     public void setAlign(String value) {
