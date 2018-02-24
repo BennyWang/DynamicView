@@ -3,7 +3,6 @@ package com.benny.library.dynamicview.view;
 import android.util.Pair;
 
 import com.benny.library.dynamicview.property.DynamicProperties;
-import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
 import org.json.JSONObject;
 

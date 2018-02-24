@@ -1,6 +1,5 @@
 package com.benny.library.dynamicview.property;
 
-
 import android.content.Context;
 import android.util.LruCache;
 

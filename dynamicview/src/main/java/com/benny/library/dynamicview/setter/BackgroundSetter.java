@@ -6,7 +6,6 @@ import android.os.Build;
 import android.view.View;
 import com.benny.library.dynamicview.property.DrawableProperty;
 
-
 public class BackgroundSetter {
     public static final String PROPERTY = "background";
 

@@ -8,6 +8,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import com.benny.library.dynamicview.parser.node.DynamicNodeFactory;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
 import com.benny.library.dynamicview.property.DynamicProperties;
+import com.benny.library.dynamicview.property.ViewIdGenerator;
 
 import java.io.StringReader;
 

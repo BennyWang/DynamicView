@@ -1,11 +1,8 @@
 package com.benny.library.dynamicview.setter;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import com.benny.library.dynamicview.property.SizeProperty;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

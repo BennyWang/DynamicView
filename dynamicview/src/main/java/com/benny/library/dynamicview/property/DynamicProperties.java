@@ -2,7 +2,6 @@ package com.benny.library.dynamicview.property;
 
 import android.text.TextUtils;
 
-import com.benny.library.dynamicview.parser.ViewIdGenerator;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
 import org.json.JSONObject;

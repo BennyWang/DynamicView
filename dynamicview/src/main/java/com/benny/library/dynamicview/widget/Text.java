@@ -3,7 +3,6 @@ package com.benny.library.dynamicview.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.view.Gravity;
 import android.widget.TextView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
