@@ -1,7 +1,9 @@
 DynamicView
 ===========
 
-一个支持动态解析XML布局的库，通过这个库，可以动态渲染类似下面的布局
+一个支持动态解析XML布局的库，通过这个库，可以动态渲染类似下面的布局, DynamicView会缓存视图结构，不会重复解析XML。<br>
+根节点SN属性是必须要设置的，不同的布局要保证不同，视图结构的缓存以此属性为Key。
+
 ```xml
 <RBox sn='000001'>
     <VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>
@@ -21,12 +23,6 @@ DynamicView
 ```
 
 ## 组件说明
-
-
-### 布局节点
-
-布局的节点并不能直接使用Android Framework中的View或者其他第三方的控件，必须要重新实现节点对应的控件类。
-这么做的原因是考虑到性能问题，复杂的布局解析比较耗时，会影响到APP的用户体验。
 
 ### 节点说明
 
@@ -173,8 +169,8 @@ public interface ActionProcessor {
 ### 使用方法
 
 ```gradle
-compile 'com.benny.library:dynamicview:0.0.2'
-annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.2'
+compile 'com.benny.library:dynamicview:0.0.3'
+annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.3'
 ```
 ```java
 
