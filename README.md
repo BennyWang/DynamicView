@@ -89,7 +89,7 @@ ViewType有三种
 <table>
 <tr><th>名称</th><th>格式(N表示数值，S表示字符串)</th><th>说明(除非特别说明，N的单位都是dp)</th></tr>
 <tr><td>name</td><td>S</td><td>控件标识</td></tr>
-<tr><td>size</td><td>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
+<tr><td>size</td><td nowrap>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
 <tr><td>margin</td><td> N [N] [N] [N] </td><td> 左上右下，一个时全部相同，两个时左右，上下</td></tr>
 <tr><td>padding</td><td> N [N] [N] [N] </td><td> 同上</td></tr>
 <tr><td>background</td><td> N(color) [N] [N] [N] [N] </td><td> 第一个为背景颜色，后面四个为圆角半径，左上，右上，右下，左下</td></tr>
@@ -120,6 +120,7 @@ ViewType有三种
 <table>
 <tr><th>名称 </th><th>  格式(N表示数值，S表示字符串) </th><th>  说明 </th></tr>
 <tr><td>src</td><td> S </td><td> URL或者本地路径</td></tr>
+<tr><td>scale</td><td>stretch|fitStart|fitEnd|center|centerCrop|centerInside </td><td>设置缩放类型</td></tr>
 </table>
 
  Grid
