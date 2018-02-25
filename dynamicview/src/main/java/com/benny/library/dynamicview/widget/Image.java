@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
+import com.benny.library.dynamicview.util.ResourceUtils;
 import com.benny.library.dynamicview.view.ViewType;
 
 import java.util.HashMap;
@@ -23,7 +24,13 @@ public class Image extends ImageView implements ViewType.View {
     }
 
     public void setSrc(String src) {
-        if (imageLoader != null) {
+        if (src.startsWith("res://")) {
+            int resourceId = ResourceUtils.getResourceIdByName(getContext(), src.substring(6));
+            if (resourceId > 0) {
+                setImageResource(resourceId);
+            }
+        }
+        else if (imageLoader != null) {
             imageLoader.loadImage(src, this);
         }
     }
@@ -42,6 +49,7 @@ public class Image extends ImageView implements ViewType.View {
         SCALE_TYPES.put("stretch", ScaleType.FIT_XY);
         SCALE_TYPES.put("fitStart", ScaleType.FIT_START);
         SCALE_TYPES.put("fitEnd", ScaleType.FIT_END);
+        SCALE_TYPES.put("fitCenter", ScaleType.FIT_CENTER);
         SCALE_TYPES.put("center", ScaleType.CENTER);
         SCALE_TYPES.put("centerCrop", ScaleType.CENTER_CROP);
         SCALE_TYPES.put("centerInside", ScaleType.CENTER_INSIDE);

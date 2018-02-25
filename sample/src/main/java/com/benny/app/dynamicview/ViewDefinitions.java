@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class ViewDefinitions {
@@ -41,8 +42,10 @@ public class ViewDefinitions {
         builder.append("</RBox>");
         viewDefs.add(new ViewDefinition(builder.toString(), getRepaymentData("2000.98", "20465.36元"), 1));
 
+        builder = new StringBuilder();
+        builder.append("<Image sn='000003' size='100 100' src='res://ic_launcher' scale='fitCenter'/>");
+        viewDefs.add(new ViewDefinition(builder.toString(), new JSONObject(), 2));
         return viewDefs;
-
     }
 
     private static JSONObject getDealReminderData(String money, String remaining) {
