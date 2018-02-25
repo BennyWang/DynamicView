@@ -1,4 +1,4 @@
-package com.benny.library.dynamicview.property;
+package com.benny.library.dynamicview.util;
 
 import java.util.HashMap;
 import java.util.Map;

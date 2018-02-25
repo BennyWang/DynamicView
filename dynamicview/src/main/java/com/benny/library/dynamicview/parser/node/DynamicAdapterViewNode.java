@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.benny.library.dynamicview.parser.DynamicViewTree;
 import com.benny.library.dynamicview.view.ViewBinder;
 import com.benny.library.dynamicview.view.ViewType;
-import com.benny.library.dynamicview.property.DynamicProperties;
+import com.benny.library.dynamicview.parser.property.NodeProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DynamicAdapterViewNode extends DynamicViewNode {
     private List<DynamicViewNode> children = new ArrayList<>();
 
-    public DynamicAdapterViewNode(String className, DynamicProperties properties) {
+    public DynamicAdapterViewNode(String className, NodeProperties properties) {
         super(className, properties);
     }
 

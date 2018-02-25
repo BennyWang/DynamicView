@@ -1,4 +1,4 @@
-package com.benny.library.dynamicview.setter;
+package com.benny.library.dynamicview.view.setter;
 
 import android.view.View;
 import android.view.ViewGroup;

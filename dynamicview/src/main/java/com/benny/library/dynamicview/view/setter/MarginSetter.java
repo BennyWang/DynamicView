@@ -1,9 +1,9 @@
-package com.benny.library.dynamicview.setter;
+package com.benny.library.dynamicview.view.setter;
 
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.property.MarginProperty;
+import com.benny.library.dynamicview.widget.property.MarginProperty;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

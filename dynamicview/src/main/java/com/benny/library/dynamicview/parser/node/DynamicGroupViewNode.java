@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.view.ViewBinder;
-import com.benny.library.dynamicview.property.DynamicProperties;
+import com.benny.library.dynamicview.parser.property.NodeProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class DynamicGroupViewNode extends DynamicViewNode {
     private List<DynamicViewNode> children = new ArrayList<>();
 
-    public DynamicGroupViewNode(String className, DynamicProperties properties) {
+    public DynamicGroupViewNode(String className, NodeProperties properties) {
         super(className, properties);
     }
 

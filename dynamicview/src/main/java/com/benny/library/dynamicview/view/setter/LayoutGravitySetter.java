@@ -1,4 +1,4 @@
-package com.benny.library.dynamicview.setter;
+package com.benny.library.dynamicview.view.setter;
 
 import android.os.Build;
 import android.view.Gravity;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.benny.library.dynamicview.property.GravityProperty;
+import com.benny.library.dynamicview.widget.property.GravityProperty;
 
 public class LayoutGravitySetter {
     public static final String PROPERTY = "gravity";

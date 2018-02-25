@@ -1,10 +1,10 @@
-package com.benny.library.dynamicview.setter;
+package com.benny.library.dynamicview.view.setter;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.view.View;
-import com.benny.library.dynamicview.property.DrawableProperty;
+import com.benny.library.dynamicview.widget.property.DrawableProperty;
 
 public class BackgroundSetter {
     public static final String PROPERTY = "background";

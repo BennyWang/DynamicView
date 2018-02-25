@@ -1,7 +1,7 @@
 package com.benny.library.dynamicview.parser.node;
 
 import com.benny.library.dynamicview.view.ViewType;
-import com.benny.library.dynamicview.property.DynamicProperties;
+import com.benny.library.dynamicview.parser.property.NodeProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.Map;
 public class DynamicNodeFactory {
     private static Map<Class, Class> viewTypeMap = new HashMap<>();
 
-    public static DynamicViewNode create(String name, DynamicProperties properties) throws Exception {
+    public static DynamicViewNode create(String name, NodeProperties properties) throws Exception {
             Class<?> clazz = DynamicViewBuilderFactory.register(name);
             Class<?> viewType = getViewType(clazz);
             if (viewType == ViewType.View.class) {
