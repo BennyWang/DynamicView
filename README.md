@@ -180,7 +180,7 @@ annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.2'
 
 // 创建View，第一个参数是Context，第二个是包含xml的字符串
 View convertView = DynamicViewEngine.getInstance().inflate(context, parent, layoutXml);
-// 注册事件处理器
+// 注册事件处理器
 DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
     @Override
     public void processAction(View view, String tag, Object... data) {
