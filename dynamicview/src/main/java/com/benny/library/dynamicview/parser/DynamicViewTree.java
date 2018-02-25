@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.view.ViewBinder;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
 import com.benny.library.dynamicview.view.ViewInflater;
@@ -29,6 +30,17 @@ public class DynamicViewTree implements ViewInflater {
         View contentView = root.createView(context, parent, viewBinder);
         contentView.setTag(KEY_BINDERS, viewBinder);
         return contentView;
+    }
+
+    public static void setActionProcessor(View view, ActionProcessor processor) {
+        try {
+            ViewBinder viewBinder = (ViewBinder) view.getTag(KEY_BINDERS);
+            if (viewBinder != null) {
+                viewBinder.setActionProcessor(processor);
+            }
+        }
+        catch (Exception ignored) {
+        }
     }
 
     public static void bindView(View view, JSONObject data) {

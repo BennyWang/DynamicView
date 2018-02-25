@@ -9,9 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.benny.library.dynamicview.DynamicViewEngine;
+import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.widget.Image;
+import com.benny.library.dynamicview.widget.Text;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -106,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
             ViewDefinitions.ViewDefinition viewDefinition = getItem(position);
             if (convertView == null) {
                 convertView = DynamicViewEngine.getInstance().inflate(MainActivity.this, null, viewDefinition.layout);
+                DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
+                    @Override
+                    public void processAction(View view, String tag, Object... data) {
+                        Toast.makeText(MainActivity.this, "action " + tag + " trigger " + ((TextView)view).getText(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             DynamicViewEngine.bindView(convertView, viewDefinition.data);
             return convertView;

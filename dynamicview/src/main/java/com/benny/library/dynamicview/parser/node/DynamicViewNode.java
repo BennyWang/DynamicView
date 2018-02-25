@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.property.DynamicProperties;
+import com.benny.library.dynamicview.parser.property.NodeProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
 import com.benny.library.dynamicview.view.ViewBinder;
@@ -13,9 +13,9 @@ public class DynamicViewNode {
     private DynamicViewNode parent;
 
     protected String name;
-    protected DynamicProperties properties;
+    protected NodeProperties properties;
 
-    public DynamicViewNode(String className, DynamicProperties properties) {
+    public DynamicViewNode(String className, NodeProperties properties) {
         this.name = className;
         this.properties = properties;
     }
@@ -49,6 +49,8 @@ public class DynamicViewNode {
 
         viewBinder.add(builder, properties);
         properties.set(builder);
+        properties.setAction(builder, viewBinder.getActionProcessor());
+
         return builder.getView();
     }
 }

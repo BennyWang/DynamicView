@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.parser.XMLLayoutParser;
 import com.benny.library.dynamicview.parser.DynamicViewTree;
 
@@ -43,6 +44,10 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
         finally {
             Log.i("DynamicViewEngine", "inflate cost " + (System.currentTimeMillis() - tick));
         }
+    }
+
+    public static void setActionProcessor(View view, ActionProcessor processor) {
+        DynamicViewTree.setActionProcessor(view, processor);
     }
 
     public static void bindView(View view, Map<String, String> data) {

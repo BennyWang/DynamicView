@@ -3,13 +3,15 @@ package com.benny.library.dynamicview.view;
 import android.content.Context;
 import android.view.View;
 
-import com.benny.library.dynamicview.setter.BackgroundSetter;
-import com.benny.library.dynamicview.setter.LayoutGravitySetter;
-import com.benny.library.dynamicview.setter.MarginSetter;
-import com.benny.library.dynamicview.setter.PaddingSetter;
-import com.benny.library.dynamicview.setter.RelativeSetter;
-import com.benny.library.dynamicview.setter.SizeSetter;
-import com.benny.library.dynamicview.setter.WeightSetter;
+import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.view.setter.BackgroundSetter;
+import com.benny.library.dynamicview.view.setter.LayoutGravitySetter;
+import com.benny.library.dynamicview.view.setter.MarginSetter;
+import com.benny.library.dynamicview.view.setter.OnClickActionSetter;
+import com.benny.library.dynamicview.view.setter.PaddingSetter;
+import com.benny.library.dynamicview.view.setter.RelativeSetter;
+import com.benny.library.dynamicview.view.setter.SizeSetter;
+import com.benny.library.dynamicview.view.setter.WeightSetter;
 
 public abstract class DynamicViewBuilder {
     protected View view;
@@ -20,6 +22,8 @@ public abstract class DynamicViewBuilder {
     private SizeSetter sizeSetter = new SizeSetter();
     private LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
     private WeightSetter weightSetter = new WeightSetter();
+
+    private OnClickActionSetter onClickActionSetter = new OnClickActionSetter();
 
     abstract public void createView(Context context);
 
@@ -54,6 +58,15 @@ public abstract class DynamicViewBuilder {
                     relativeSetter.set(view, key, value);
                     return true;
                 }
+        }
+        return false;
+    }
+
+    public boolean setAction(String key, String value, ActionProcessor processor) {
+        switch (key) {
+            case OnClickActionSetter.PROPERTY:
+                onClickActionSetter.setOnClickAction(view, value, processor);
+                return true;
         }
         return false;
     }

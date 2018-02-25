@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
-import com.benny.library.dynamicview.property.GravityProperty;
+import com.benny.library.dynamicview.widget.property.GravityProperty;
 import com.benny.library.dynamicview.view.ViewType;
 
 @DynamicView

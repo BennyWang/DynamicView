@@ -144,6 +144,31 @@ ViewType有三种
 ```
 Grid节点只能有一个子节点，此节点可以理解成子控件的模版，Grid会根据items数组的数量，动态生成对应的子View。items数组中的每个值都是一个JSONObject，子节点中的动态属性绑定到这个JSONObject上
 
+### 事件处理
+
+```java
+// 事件处理器
+public interface ActionProcessor {
+    /**
+    * view 事件产生视图
+    * tag  事件标记
+    * data 附加参数    
+    */
+    void processAction(View view, String tag, Object... data);
+}
+```
+
+事件属性的格式为 (tag)
+```xml
+<Text text='{value}' onClick='(VALUE_CLICK)' color='black'/>
+```
+
+通用事件
+<table>
+<tr><th>名称 </th><th> 说明 </th></tr>
+<tr><td>onClick</td><td>控件点击事件</td></tr>
+</table>
+
 
 ### 使用方法
 
@@ -155,6 +180,13 @@ annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.2'
 
 // 创建View，第一个参数是Context，第二个是包含xml的字符串
 View convertView = DynamicViewEngine.getInstance().inflate(context, parent, layoutXml);
+// 注册事件处理器
+DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
+    @Override
+    public void processAction(View view, String tag, Object... data) {
+        //xxxxx
+    }
+});
 // 绑定动态属性，第一个参数是通过上面方法创建的view，第二个值是数据，Map<String, String> 或者 JSONObject
 DynamicViewEngine.getInstance().bindView(convertView, data);
 

@@ -7,8 +7,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.benny.library.dynamicview.parser.node.DynamicNodeFactory;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
-import com.benny.library.dynamicview.property.DynamicProperties;
-import com.benny.library.dynamicview.property.ViewIdGenerator;
+import com.benny.library.dynamicview.parser.property.NodeProperties;
+import com.benny.library.dynamicview.util.ViewIdGenerator;
 
 import java.io.StringReader;
 
@@ -63,12 +63,12 @@ public class XMLLayoutParser {
 
     private DynamicViewNode parseNode(XmlPullParser parser, ViewIdGenerator viewIdGenerator) throws Exception {
         String className = parser.getName();
-        DynamicProperties properties = parseAttributes(parser, viewIdGenerator);
+        NodeProperties properties = parseAttributes(parser, viewIdGenerator);
         return DynamicNodeFactory.create(className, properties);
     }
 
-    private DynamicProperties parseAttributes(XmlPullParser parser, ViewIdGenerator viewIdGenerator) {
-        DynamicProperties properties = new DynamicProperties(viewIdGenerator);
+    private NodeProperties parseAttributes(XmlPullParser parser, ViewIdGenerator viewIdGenerator) {
+        NodeProperties properties = new NodeProperties(viewIdGenerator);
         int attrCount = parser.getAttributeCount();
         for (int i = 0; i < attrCount; ++i) {
             properties.add(parser.getAttributeName(i), parser.getAttributeValue(i));
