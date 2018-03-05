@@ -1,4 +1,4 @@
-package com.benny.library.dynamicview.widget.property;
+package com.benny.library.dynamicview.view.property;
 
 import android.content.Context;
 import android.util.LruCache;

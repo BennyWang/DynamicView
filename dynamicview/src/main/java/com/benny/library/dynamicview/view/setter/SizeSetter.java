@@ -2,7 +2,7 @@ package com.benny.library.dynamicview.view.setter;
 
 import android.view.View;
 import android.view.ViewGroup;
-import com.benny.library.dynamicview.widget.property.SizeProperty;
+import com.benny.library.dynamicview.view.property.SizeProperty;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
