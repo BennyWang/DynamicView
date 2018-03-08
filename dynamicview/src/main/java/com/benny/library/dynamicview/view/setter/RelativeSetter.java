@@ -19,19 +19,7 @@ public class RelativeSetter {
     private static final String ALIGN_BOTTOM = "alignBottom";
     private static final String ALIGN_BASELINE = "alignBaseline";
 
-    private Map<String, Integer> PROPERTIES = new HashMap<>();
-
-    public RelativeSetter() {
-        PROPERTIES.put(LEFT_OF, RelativeLayout.LEFT_OF);
-        PROPERTIES.put(RIGHT_OF, RelativeLayout.RIGHT_OF);
-        PROPERTIES.put(ABOVE, RelativeLayout.ABOVE);
-        PROPERTIES.put(BELOW, RelativeLayout.BELOW);
-        PROPERTIES.put(ALIGN_LEFT, RelativeLayout.ALIGN_LEFT);
-        PROPERTIES.put(ALIGN_RIGHT, RelativeLayout.ALIGN_RIGHT);
-        PROPERTIES.put(ALIGN_TOP, RelativeLayout.ALIGN_TOP);
-        PROPERTIES.put(ALIGN_BOTTOM, RelativeLayout.ALIGN_BOTTOM);
-        PROPERTIES.put(ALIGN_BASELINE, RelativeLayout.ALIGN_BASELINE);
-    }
+    private static Map<String, Integer> PROPERTIES = new HashMap<>();
 
     public boolean canHandle(String prop) {
         return PROPERTIES.containsKey(prop);
@@ -42,5 +30,17 @@ public class RelativeSetter {
         if (lparams != null && lparams instanceof RelativeLayout.LayoutParams) {
             ((RelativeLayout.LayoutParams) lparams).addRule(PROPERTIES.get(key), Integer.parseInt(value));
         }
+    }
+
+    static {
+        PROPERTIES.put(LEFT_OF, RelativeLayout.LEFT_OF);
+        PROPERTIES.put(RIGHT_OF, RelativeLayout.RIGHT_OF);
+        PROPERTIES.put(ABOVE, RelativeLayout.ABOVE);
+        PROPERTIES.put(BELOW, RelativeLayout.BELOW);
+        PROPERTIES.put(ALIGN_LEFT, RelativeLayout.ALIGN_LEFT);
+        PROPERTIES.put(ALIGN_RIGHT, RelativeLayout.ALIGN_RIGHT);
+        PROPERTIES.put(ALIGN_TOP, RelativeLayout.ALIGN_TOP);
+        PROPERTIES.put(ALIGN_BOTTOM, RelativeLayout.ALIGN_BOTTOM);
+        PROPERTIES.put(ALIGN_BASELINE, RelativeLayout.ALIGN_BASELINE);
     }
 }

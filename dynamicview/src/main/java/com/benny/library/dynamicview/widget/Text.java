@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
-import com.benny.library.dynamicview.widget.property.GravityProperty;
+import com.benny.library.dynamicview.view.property.GravityProperty;
 import com.benny.library.dynamicview.view.ViewType;
 
 @DynamicView

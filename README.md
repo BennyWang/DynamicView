@@ -89,11 +89,11 @@ ViewType有三种
 <table>
 <tr><th>名称</th><th>格式(N表示数值，S表示字符串)</th><th>说明(除非特别说明，N的单位都是dp)</th></tr>
 <tr><td>name</td><td>S</td><td>控件标识</td></tr>
-<tr><td>size</td><td>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
+<tr><td>size</td><td nowrap>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
 <tr><td>margin</td><td> N [N] [N] [N] </td><td> 左上右下，一个时全部相同，两个时左右，上下</td></tr>
 <tr><td>padding</td><td> N [N] [N] [N] </td><td> 同上</td></tr>
 <tr><td>background</td><td> N(color) [N] [N] [N] [N] </td><td> 第一个为背景颜色，后面四个为圆角半径，左上，右上，右下，左下</td></tr>
-<tr><td>gravity</td><td>center|left|right|top|bottom</td><td>单个或者组合，使用|分隔</td></tr>
+<tr><td>gravity</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用|分隔</td></tr>
 <tr><td>weight</td><td>N</td><td>只有放在HBox和VBox中的控件设置才会有效果</td></tr>
 <tr><td>leftOf</td><td>@S</td><td>S为通过name设置的控件标识, 只有放在RBox中的控件设置才会有效果</td></tr>
 <tr><td>rightOf</td><td>@S</td><td>同上</td></tr>
@@ -104,7 +104,7 @@ ViewType有三种
 <tr><td>alignTop</td><td>@S</td><td>同上</td></tr>
 <tr><td>alignBottom</td><td>@S</td><td>同上</td></tr>
 <tr><td>alignBaseline</td><td>@S</td><td>同上</td></tr>
-<tr><td>align</td><td>center|left|right|top|bottom</td><td>单个或者组合，使用\|分隔，<font color=#A52A2A>容器类和Text具有此属性，控制子元素的对齐方式</td></tr>
+<tr><td>align</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用\|分隔，<font color=#A52A2A>容器类和Text具有此属性，控制子元素的对齐方式</td></tr>
 </table>
 
  Text
@@ -113,13 +113,14 @@ ViewType有三种
 <tr><td>text</td><td> S </td><td>文本内容</td></tr>
 <tr><td>fontSize</td><td> N </td><td>字体大小，单位为sp</td></tr>
 <tr><td>color</td><td> N(color) </td><td> 字体颜色</td></tr>
-<tr><td>style</td><td> bold|italic</td><td> 设置粗体或者斜体</td></tr>
+<tr><td>style</td><td> bold | italic</td><td> 设置粗体或者斜体</td></tr>
 </table>
 
  Image
 <table>
 <tr><th>名称 </th><th>  格式(N表示数值，S表示字符串) </th><th>  说明 </th></tr>
-<tr><td>src</td><td> S </td><td> URL或者本地路径</td></tr>
+<tr><td>src</td><td>res://xxxx | url | path </td><td> 资源名称，URL，本地路径</td></tr>
+<tr><td>scale</td><td>stretch | fitStart | fitEnd | fitCenter | center | centerCrop | centerInside </td><td>设置缩放类型</td></tr>
 </table>
 
  Grid
@@ -154,9 +155,10 @@ public interface ActionProcessor {
 }
 ```
 
-事件属性的格式为 (tag)
+事件属性的格式为 (tag) 或者 ({value})，后者会使用绑定数据中key为value的值作为tag
 ```xml
 <Text text='{value}' onClick='(VALUE_CLICK)' color='black'/>
+<Text text='{value}' onClick='({VALUE_CLICK})' color='black'/>
 ```
 
 通用事件

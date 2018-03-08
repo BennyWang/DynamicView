@@ -35,7 +35,7 @@ public abstract class DynamicViewBuilder {
         switch (key) {
             case "id":
                 view.setId(Integer.parseInt(value));
-                break;
+                return true;
             case MarginSetter.PROPERTY:
                 marginSetter.setMargin(view, value);
                 return true;
@@ -50,6 +50,7 @@ public abstract class DynamicViewBuilder {
                 return true;
             case LayoutGravitySetter.PROPERTY:
                 layoutGravitySetter.setGravity(view, value);
+                return true;
             case WeightSetter.PROPERTY:
                 weightSetter.setWeight(view, value);
                 return true;

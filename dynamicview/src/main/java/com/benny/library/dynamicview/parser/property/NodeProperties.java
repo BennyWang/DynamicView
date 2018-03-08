@@ -16,6 +16,7 @@ public class NodeProperties {
     private Map<String, StaticProperty> staticProperties = new HashMap<>();
     private Map<String, DynamicProperty> dynamicProperties = new HashMap<>();
     private Map<String, ActionProperty> actions = new HashMap<>();
+    private Map<String, DynamicActionProperty> dynamicActions = new HashMap<>();
 
     public NodeProperties(ViewIdGenerator idGenerator) {
         this.idGenerator = idGenerator;
@@ -23,12 +24,16 @@ public class NodeProperties {
 
     public void add(String key, String value) {
         if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
-            if (ActionProperty.canHandle(key, value)) {
+            if (DynamicActionProperty.canHandle(key, value)) {
+                dynamicActions.put(key, new DynamicActionProperty(key, value));
+            }
+            else if (ActionProperty.canHandle(key, value)) {
                 actions.put(key, new ActionProperty(key, value));
-            } else if (DynamicProperty.canHandle(key, value)) {
+            }
+            else if (DynamicProperty.canHandle(key, value)) {
                 dynamicProperties.put(key, new DynamicProperty(key, value));
             } else {
-                processStaticProcess(key, value);
+                processStaticProperty(key, value);
             }
         }
     }
@@ -51,19 +56,27 @@ public class NodeProperties {
         }
     }
 
-    public void set(DynamicViewBuilder builder, Map<String, String> data) {
+    public void set(DynamicViewBuilder builder, ActionProcessor processor, Map<String, String> data) {
         for (Map.Entry<String, DynamicProperty> entry : dynamicProperties.entrySet()) {
             entry.getValue().set(builder, data);
         }
-    }
 
-    public void set(DynamicViewBuilder builder, JSONObject data) {
-        for (Map.Entry<String, DynamicProperty> entry : dynamicProperties.entrySet()) {
-            entry.getValue().set(builder, data);
+        for (Map.Entry<String, DynamicActionProperty> entry : dynamicActions.entrySet()) {
+            entry.getValue().set(builder, processor, data);
         }
     }
 
-    private void processStaticProcess(String key, String value) {
+    public void set(DynamicViewBuilder builder, ActionProcessor processor, JSONObject data) {
+        for (Map.Entry<String, DynamicProperty> entry : dynamicProperties.entrySet()) {
+            entry.getValue().set(builder, data);
+        }
+
+        for (Map.Entry<String, DynamicActionProperty> entry : dynamicActions.entrySet()) {
+            entry.getValue().set(builder, processor, data);
+        }
+    }
+
+    private void processStaticProperty(String key, String value) {
         if (key.equals("name")) {
             staticProperties.put("id", new StaticProperty("id", idGenerator.getId(value)));
         }

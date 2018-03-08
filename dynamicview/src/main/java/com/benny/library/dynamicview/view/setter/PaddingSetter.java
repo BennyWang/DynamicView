@@ -1,7 +1,7 @@
 package com.benny.library.dynamicview.view.setter;
 
 import android.view.View;
-import com.benny.library.dynamicview.widget.property.MarginProperty;
+import com.benny.library.dynamicview.view.property.MarginProperty;
 
 public class PaddingSetter {
     public static final String PROPERTY = "padding";
