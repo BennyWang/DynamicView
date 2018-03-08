@@ -155,9 +155,10 @@ public interface ActionProcessor {
 }
 ```
 
-事件属性的格式为 (tag)
+事件属性的格式为 (tag) 或者 ({value})，后者会使用绑定数据中key为value的值作为tag
 ```xml
 <Text text='{value}' onClick='(VALUE_CLICK)' color='black'/>
+<Text text='{value}' onClick='({VALUE_CLICK})' color='black'/>
 ```
 
 通用事件
