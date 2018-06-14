@@ -26,12 +26,6 @@ public class ViewBinder {
         }
     }
 
-    public void bind(Map<String, String> data) {
-        for (Pair<DynamicViewBuilder, NodeProperties> pair : pairs) {
-            pair.second.set(pair.first, actionProcessorWrapper, data);
-        }
-    }
-
     public void setActionProcessor(ActionProcessor processor) {
         actionProcessorWrapper.setProcessor(processor);
     }
@@ -48,7 +42,7 @@ public class ViewBinder {
         }
 
         @Override
-        public void processAction(View view, String tag, Object... data) {
+        public void processAction(View view, String tag, JSONObject data) {
             if (processor != null) {
                 processor.processAction(view, tag, data);
             }

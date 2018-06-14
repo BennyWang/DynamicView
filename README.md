@@ -149,16 +149,15 @@ public interface ActionProcessor {
     /**
     * view 事件产生视图
     * tag  事件标记
-    * data 附加参数    
+    * data bind数据
     */
-    void processAction(View view, String tag, Object... data);
+    void processAction(View view, String tag, JSONObject data);
 }
 ```
 
-事件属性的格式为 (tag) 或者 ({value})，后者会使用绑定数据中key为value的值作为tag
+事件属性的格式为 (tag)
 ```xml
 <Text text='{value}' onClick='(VALUE_CLICK)' color='black'/>
-<Text text='{value}' onClick='({VALUE_CLICK})' color='black'/>
 ```
 
 通用事件
@@ -180,8 +179,9 @@ annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.3'
 View convertView = DynamicViewEngine.getInstance().inflate(context, parent, layoutXml);
 // 注册事件处理器
 DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
+    // data 参数为bindView传入的JSONObject
     @Override
-    public void processAction(View view, String tag, Object... data) {
+    public void processAction(View view, String tag, JSONObject data) {
         //xxxxx
     }
 });

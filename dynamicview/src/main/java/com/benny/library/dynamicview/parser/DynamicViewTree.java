@@ -16,9 +16,15 @@ import java.util.Map;
 public class DynamicViewTree implements ViewInflater {
     private static final int KEY_BINDERS = 1 + 2 << 24;
     private DynamicViewNode root;
+    private ActionProcessor defaultProcessor;
 
     public DynamicViewTree(DynamicViewNode root) {
         this.root = root;
+    }
+
+    public DynamicViewTree(DynamicViewNode root, ActionProcessor processor) {
+        this.root = root;
+        defaultProcessor = processor;
     }
 
     public DynamicViewNode getRoot() {
@@ -28,6 +34,9 @@ public class DynamicViewTree implements ViewInflater {
     public View inflate(Context context, ViewGroup parent) throws Exception {
         ViewBinder viewBinder = new ViewBinder();
         View contentView = root.createView(context, parent, viewBinder);
+        if (defaultProcessor != null) {
+            viewBinder.setActionProcessor(defaultProcessor);
+        }
         contentView.setTag(KEY_BINDERS, viewBinder);
         return contentView;
     }
@@ -44,17 +53,6 @@ public class DynamicViewTree implements ViewInflater {
     }
 
     public static void bindView(View view, JSONObject data) {
-        try {
-            ViewBinder viewBinder = (ViewBinder) view.getTag(KEY_BINDERS);
-            if (viewBinder != null) {
-                viewBinder.bind(data);
-            }
-        }
-        catch (Exception ignored) {
-        }
-    }
-
-    public static void bindView(View view, Map<String, String> data) {
         try {
             ViewBinder viewBinder = (ViewBinder) view.getTag(KEY_BINDERS);
             if (viewBinder != null) {

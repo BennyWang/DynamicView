@@ -13,6 +13,8 @@ import com.benny.library.dynamicview.view.setter.RelativeSetter;
 import com.benny.library.dynamicview.view.setter.SizeSetter;
 import com.benny.library.dynamicview.view.setter.WeightSetter;
 
+import org.json.JSONObject;
+
 public abstract class DynamicViewBuilder {
     protected View view;
     private RelativeSetter relativeSetter = new RelativeSetter();
@@ -63,10 +65,10 @@ public abstract class DynamicViewBuilder {
         return false;
     }
 
-    public boolean setAction(String key, String value, ActionProcessor processor) {
+    public boolean setAction(String key, String value, ActionProcessor processor, JSONObject data) {
         switch (key) {
             case OnClickActionSetter.PROPERTY:
-                onClickActionSetter.setOnClickAction(view, value, processor);
+                onClickActionSetter.setOnClickAction(view, value, data, processor);
                 return true;
         }
         return false;

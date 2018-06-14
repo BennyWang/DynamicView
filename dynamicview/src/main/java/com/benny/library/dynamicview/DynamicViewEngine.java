@@ -26,7 +26,7 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
         DynamicViewTree viewTree = parser.parseDocument(xml);
         String serialNumber = viewTree.getRoot().getProperty("sn");
         if (!viewTreeMap.containsKey(serialNumber)) {
-            viewTreeMap.put(serialNumber, viewTree);
+            viewTreeMap.put(serialNumber, viewTree);    
         }
         return viewTree;
     }
@@ -51,7 +51,7 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
     }
 
     public static void bindView(View view, Map<String, String> data) {
-        DynamicViewTree.bindView(view, data);
+        DynamicViewTree.bindView(view, new JSONObject(data));
     }
 
     public static void bindView(View view, JSONObject data) {

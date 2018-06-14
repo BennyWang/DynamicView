@@ -32,7 +32,7 @@ public class DynamicAdapterViewNode extends DynamicViewNode {
     public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
         View view = super.createView(context, parent, viewBinder);
         if (children.size() > 0) {
-            ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(children.get(0)));
+            ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(children.get(0), viewBinder.getActionProcessor()));
         }
         return view;
     }

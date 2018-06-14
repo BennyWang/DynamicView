@@ -36,7 +36,7 @@ public class ViewDefinitions {
         builder.append("<Text text='还款金额' margin='0 10 0 0'/>");
         builder.append("<HBox><Text text='{money}' fontSize='28' color='black'/><Text text='人民币'/></HBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
-        builder.append("<VBox margin='0 10 0 0'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
+        builder.append("<VBox margin='0 10 0 0' onClick='(ITEM_CLICK)'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
         builder.append("</Grid>");
         builder.append("</VBox>");
         builder.append("</RBox>");

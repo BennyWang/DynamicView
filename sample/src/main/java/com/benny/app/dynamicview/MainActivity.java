@@ -112,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 convertView = DynamicViewEngine.getInstance().inflate(MainActivity.this, null, viewDefinition.layout);
                 DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
                     @Override
-                    public void processAction(View view, String tag, Object... data) {
-                        Toast.makeText(MainActivity.this, "action " + tag + " trigger " + ((TextView)view).getText(), Toast.LENGTH_SHORT).show();
+                    public void processAction(View view, String tag, JSONObject data) {
+                        Toast.makeText(MainActivity.this, "target: " + view + " trigger action " + tag + " with data " + data, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

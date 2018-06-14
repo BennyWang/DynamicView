@@ -16,7 +16,6 @@ public class NodeProperties {
     private Map<String, StaticProperty> staticProperties = new HashMap<>();
     private Map<String, DynamicProperty> dynamicProperties = new HashMap<>();
     private Map<String, ActionProperty> actions = new HashMap<>();
-    private Map<String, DynamicActionProperty> dynamicActions = new HashMap<>();
 
     public NodeProperties(ViewIdGenerator idGenerator) {
         this.idGenerator = idGenerator;
@@ -24,10 +23,7 @@ public class NodeProperties {
 
     public void add(String key, String value) {
         if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
-            if (DynamicActionProperty.canHandle(key, value)) {
-                dynamicActions.put(key, new DynamicActionProperty(key, value));
-            }
-            else if (ActionProperty.canHandle(key, value)) {
+            if (ActionProperty.canHandle(key, value)) {
                 actions.put(key, new ActionProperty(key, value));
             }
             else if (DynamicProperty.canHandle(key, value)) {
@@ -51,18 +47,8 @@ public class NodeProperties {
     public void setAction(DynamicViewBuilder builder, ActionProcessor processor) {
         if (!actions.isEmpty()) {
             for (Map.Entry<String, ActionProperty> entry : actions.entrySet()) {
-                entry.getValue().set(builder, processor);
+                entry.getValue().set(builder, processor, null);
             }
-        }
-    }
-
-    public void set(DynamicViewBuilder builder, ActionProcessor processor, Map<String, String> data) {
-        for (Map.Entry<String, DynamicProperty> entry : dynamicProperties.entrySet()) {
-            entry.getValue().set(builder, data);
-        }
-
-        for (Map.Entry<String, DynamicActionProperty> entry : dynamicActions.entrySet()) {
-            entry.getValue().set(builder, processor, data);
         }
     }
 
@@ -71,7 +57,7 @@ public class NodeProperties {
             entry.getValue().set(builder, data);
         }
 
-        for (Map.Entry<String, DynamicActionProperty> entry : dynamicActions.entrySet()) {
+        for (Map.Entry<String, ActionProperty> entry : actions.entrySet()) {
             entry.getValue().set(builder, processor, data);
         }
     }

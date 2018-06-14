@@ -3,6 +3,8 @@ package com.benny.library.dynamicview.parser.property;
 import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
+import org.json.JSONObject;
+
 public class ActionProperty {
     private String key;
     private String value;
@@ -16,7 +18,7 @@ public class ActionProperty {
         this.value = value.substring(1, value.length() - 1);
     }
 
-    public void set(DynamicViewBuilder builder, ActionProcessor processor) {
-        builder.setAction(key, value, processor);
+    public void set(DynamicViewBuilder builder, ActionProcessor processor, JSONObject data) {
+        builder.setAction(key, value, processor, data);
     }
 }
