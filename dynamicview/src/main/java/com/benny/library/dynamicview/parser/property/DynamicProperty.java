@@ -20,7 +20,7 @@ public class DynamicProperty {
     public void set(DynamicViewBuilder builder, JSONObject data) {
         try {
             if (data.has(valueKey)) {
-                builder.setProperty(key, data.optString(valueKey));
+                builder.setProperty(key, data.opt(valueKey));
             }
         }
         catch (Exception ignored) {

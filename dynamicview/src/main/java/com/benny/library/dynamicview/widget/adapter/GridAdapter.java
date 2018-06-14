@@ -16,12 +16,9 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private JSONArray dataSource = new JSONArray();
     private ViewInflater inflater;
 
-    public void setDataSource(String source) {
-        try {
-            dataSource = new JSONArray(source);
-        }
-        catch (JSONException ignored) {
-        }
+    public void setDataSource(JSONArray source) {
+        dataSource = source;
+        notifyDataSetChanged();
     }
 
     public void setInflater(ViewInflater inflater) {

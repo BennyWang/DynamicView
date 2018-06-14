@@ -13,6 +13,8 @@ import com.benny.library.dynamicview.view.setter.RelativeSetter;
 import com.benny.library.dynamicview.view.setter.SizeSetter;
 import com.benny.library.dynamicview.view.setter.WeightSetter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class DynamicViewBuilder {
@@ -33,32 +35,32 @@ public abstract class DynamicViewBuilder {
         return view;
     }
 
-    public boolean setProperty(String key, String value) {
+    public boolean setProperty(String key, Object value) {
         switch (key) {
             case "id":
-                view.setId(Integer.parseInt(value));
+                view.setId(Integer.parseInt((String) value));
                 return true;
             case MarginSetter.PROPERTY:
-                marginSetter.setMargin(view, value);
+                marginSetter.setMargin(view, (String) value);
                 return true;
             case PaddingSetter.PROPERTY:
-                paddingSetter.setPadding(view, value);
+                paddingSetter.setPadding(view, (String) value);
                 return true;
             case BackgroundSetter.PROPERTY:
-                backgroundSetter.setBackground(view, value);
+                backgroundSetter.setBackground(view, (String) value);
                 return true;
             case SizeSetter.PROPERTY:
-                sizeSetter.setSize(view, value);
+                sizeSetter.setSize(view, (String) value);
                 return true;
             case LayoutGravitySetter.PROPERTY:
-                layoutGravitySetter.setGravity(view, value);
+                layoutGravitySetter.setGravity(view, (String) value);
                 return true;
             case WeightSetter.PROPERTY:
-                weightSetter.setWeight(view, value);
+                weightSetter.setWeight(view, (String) value);
                 return true;
             default:
                 if (relativeSetter.canHandle(key)) {
-                    relativeSetter.set(view, key, value);
+                    relativeSetter.set(view, key, (String) value);
                     return true;
                 }
         }
@@ -72,5 +74,59 @@ public abstract class DynamicViewBuilder {
                 return true;
         }
         return false;
+    }
+
+    protected int toInt(Object value) {
+        if (value instanceof Number) {
+            ((Number) value).intValue();
+        }
+
+        return Integer.parseInt(value.toString());
+    }
+
+    protected long toLong(Object value) {
+        if (value instanceof Number) {
+            ((Number) value).intValue();
+        }
+
+        return Long.parseLong(value.toString());
+    }
+
+    protected double toDouble(Object value) {
+        if (value instanceof Number) {
+            ((Number) value).intValue();
+        }
+
+        return Double.parseDouble(value.toString());
+    }
+
+    protected String toString(Object value) {
+        return value.toString();
+    }
+
+    protected JSONObject toJSONObject(Object value) {
+        if (value instanceof JSONObject) {
+            return (JSONObject) value;
+        }
+
+        try {
+            return new JSONObject(value.toString());
+        }
+        catch (JSONException e) {
+            return null;
+        }
+    }
+
+    protected JSONArray toJSONArray(Object value) {
+        if (value instanceof JSONArray) {
+            return (JSONArray) value;
+        }
+
+        try {
+            return new JSONArray(value.toString());
+        }
+        catch (JSONException e) {
+            return null;
+        }
     }
 }

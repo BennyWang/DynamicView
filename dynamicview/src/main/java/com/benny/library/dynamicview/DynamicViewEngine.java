@@ -51,11 +51,15 @@ public class DynamicViewEngine implements XMLLayoutParser.SerialNumberHandler {
     }
 
     public static void bindView(View view, Map<String, String> data) {
+        long tick = System.currentTimeMillis();
         DynamicViewTree.bindView(view, new JSONObject(data));
+        Log.i("DynamicViewEngine", "bindView cost " + (System.currentTimeMillis() - tick));
     }
 
     public static void bindView(View view, JSONObject data) {
+        long tick = System.currentTimeMillis();
         DynamicViewTree.bindView(view, data);
+        Log.i("DynamicViewEngine", "bindView cost " + (System.currentTimeMillis() - tick));
     }
 
     @Override

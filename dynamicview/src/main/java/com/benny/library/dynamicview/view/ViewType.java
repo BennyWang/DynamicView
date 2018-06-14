@@ -1,5 +1,7 @@
 package com.benny.library.dynamicview.view;
 
+import org.json.JSONArray;
+
 public class ViewType {
     public interface View {
     }
@@ -8,7 +10,7 @@ public class ViewType {
     }
 
     public interface AdapterView {
-        void setDataSource(String source);
+        void setDataSource(JSONArray source);
         void setInflater(ViewInflater inflater);
     }
 }

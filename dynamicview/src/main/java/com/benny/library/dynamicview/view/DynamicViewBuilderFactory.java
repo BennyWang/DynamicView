@@ -20,8 +20,6 @@ public class DynamicViewBuilderFactory {
         if (clazz == null) {
             clazz = Class.forName(GENERATED_PACKAGE + name + "$$Builder");
             classCache.put(name, clazz);
-
-            clazz.newInstance();
         }
         return clazz;
     }

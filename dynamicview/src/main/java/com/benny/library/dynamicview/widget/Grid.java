@@ -8,6 +8,8 @@ import com.benny.library.dynamicview.view.ViewInflater;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.widget.adapter.GridAdapter;
 
+import org.json.JSONArray;
+
 @DynamicView
 public class Grid extends RecyclerView implements ViewType.AdapterView {
     private static final int DEFAULT_SPAN_COUNT = 1;
@@ -31,16 +33,16 @@ public class Grid extends RecyclerView implements ViewType.AdapterView {
         setAdapter(adapter);
     }
 
-    public void setSpanCount(String spanCount) {
+    public void setSpanCount(int spanCount) {
         try {
-            layoutManager.setSpanCount(Integer.parseInt(spanCount));
+            layoutManager.setSpanCount(spanCount);
         }
         catch (Exception ignored) {
         }
     }
 
     @Override
-    public void setDataSource(String source) {
+    public void setDataSource(JSONArray source) {
         adapter.setDataSource(source);
     }
 

@@ -61,7 +61,7 @@ public class DynamicViewProcessor extends AbstractProcessor {
             if (member.getKind() != ElementKind.METHOD || !DynamicViewSetter.isValidSetterMethod((ExecutableElement) member)) {
                 continue;
             }
-            dynamicViewClass.addSetter(new DynamicViewSetter(member.getSimpleName().toString()));
+            dynamicViewClass.addSetter(new DynamicViewSetter((ExecutableElement) member));
         }
     }
 

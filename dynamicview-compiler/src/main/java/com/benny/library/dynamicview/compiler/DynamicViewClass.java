@@ -84,7 +84,7 @@ public class DynamicViewClass {
 
         MethodSpec.Builder setDataSourceMethod = MethodSpec.methodBuilder("setDataSource")
                 .addModifiers(PUBLIC)
-                .addParameter(String.class, "dataSource");
+                .addParameter(TypeVariableName.get("org.json.JSONArray"), "dataSource");
         result.addMethod(setDataSourceMethod.build());
     }
 
@@ -113,7 +113,7 @@ public class DynamicViewClass {
                 .addAnnotation(Override.class)
                 .addModifiers(PUBLIC)
                 .addParameter(String.class, "key", FINAL)
-                .addParameter(String.class, "value", FINAL)
+                .addParameter(Object.class, "value", FINAL)
                 .returns(boolean.class);
 
         setMethod.addStatement("if (super.setProperty(key, value)) return true");
