@@ -17,7 +17,7 @@ DynamicView
             <VBox margin='0 10 0 0'><Text text='{name}'/>
                 <Text text='{value}' color='black'/>
             </VBox>
-        </Grid>
+            y
     </VBox>
 </RBox>
 ```
@@ -73,7 +73,7 @@ ViewType有三种
 
 属性值有两种形态
 * 字面值 title="Hello World"，这种属性会直接通过setter设置给控件
-* 动态属性 logo="{logo}" logo会绑定到一个Map或者是JSONObject的key为logo的值
+* 动态属性 logo="{logo|xxxx}" logo会绑定到一个Map或者是JSONObject的key为logo的值, 如果包含|，则|后边的会被当做为默认值，及JSONObject或者Map中不存在key对应的值时使用
 
 ### 内置节点
 
@@ -92,7 +92,7 @@ ViewType有三种
 <tr><td>size</td><td nowrap>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
 <tr><td>margin</td><td> N [N] [N] [N] </td><td> 左上右下，一个时全部相同，两个时左右，上下</td></tr>
 <tr><td>padding</td><td> N [N] [N] [N] </td><td> 同上</td></tr>
-<tr><td>background</td><td> N(color) [N] [N] [N] [N] </td><td> 第一个为背景颜色，后面四个为圆角半径，左上，右上，右下，左下</td></tr>
+<tr><td>background</td><td> res:// | N(color) [N] [N] [N] [N] </td><td> res://xxxx 直接指定资源名称，或者第二种，第一个为背景颜色，后面四个为圆角半径，左上，右上，右下，左下</td></tr>
 <tr><td>gravity</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用|分隔</td></tr>
 <tr><td>weight</td><td>N</td><td>只有放在HBox和VBox中的控件设置才会有效果</td></tr>
 <tr><td>leftOf</td><td>@S</td><td>S为通过name设置的控件标识, 只有放在RBox中的控件设置才会有效果</td></tr>

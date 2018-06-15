@@ -11,6 +11,7 @@ import com.benny.library.dynamicview.view.setter.OnClickActionSetter;
 import com.benny.library.dynamicview.view.setter.PaddingSetter;
 import com.benny.library.dynamicview.view.setter.RelativeSetter;
 import com.benny.library.dynamicview.view.setter.SizeSetter;
+import com.benny.library.dynamicview.view.setter.VisibilitySetter;
 import com.benny.library.dynamicview.view.setter.WeightSetter;
 
 import org.json.JSONArray;
@@ -18,16 +19,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class DynamicViewBuilder {
-    protected View view;
-    private RelativeSetter relativeSetter = new RelativeSetter();
-    private MarginSetter marginSetter = new MarginSetter();
-    private PaddingSetter paddingSetter = new PaddingSetter();
-    private BackgroundSetter backgroundSetter = new BackgroundSetter();
-    private SizeSetter sizeSetter = new SizeSetter();
-    private LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
-    private WeightSetter weightSetter = new WeightSetter();
+    private static RelativeSetter relativeSetter = new RelativeSetter();
+    private static MarginSetter marginSetter = new MarginSetter();
+    private static PaddingSetter paddingSetter = new PaddingSetter();
+    private static BackgroundSetter backgroundSetter = new BackgroundSetter();
+    private static SizeSetter sizeSetter = new SizeSetter();
+    private static LayoutGravitySetter layoutGravitySetter = new LayoutGravitySetter();
+    private static WeightSetter weightSetter = new WeightSetter();
+    private static VisibilitySetter visibilitySetter = new VisibilitySetter();
+    private static OnClickActionSetter onClickActionSetter = new OnClickActionSetter();
 
-    private OnClickActionSetter onClickActionSetter = new OnClickActionSetter();
+    protected View view;
 
     abstract public void createView(Context context);
 
@@ -57,6 +59,9 @@ public abstract class DynamicViewBuilder {
                 return true;
             case WeightSetter.PROPERTY:
                 weightSetter.setWeight(view, (String) value);
+                return true;
+            case VisibilitySetter.PROPERTY:
+                visibilitySetter.setVisibility(view, (String) value);
                 return true;
             default:
                 if (relativeSetter.canHandle(key)) {

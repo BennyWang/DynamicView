@@ -27,7 +27,14 @@ public class NodeProperties {
                 actions.put(key, new ActionProperty(key, value));
             }
             else if (DynamicProperty.canHandle(key, value)) {
-                dynamicProperties.put(key, new DynamicProperty(key, value));
+                DynamicProperty property = new DynamicProperty(key, value);
+                dynamicProperties.put(key, property);
+
+                // 如果存在默认值，添加到静态属性中
+                String defaultValue = property.getDefaultValue();
+                if (!TextUtils.isEmpty(defaultValue)) {
+                    processStaticProperty(key, defaultValue);
+                }
             } else {
                 processStaticProperty(key, value);
             }
