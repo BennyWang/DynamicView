@@ -5,6 +5,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.benny.library.dynamicview.parser.node.DynamicNode;
 import com.benny.library.dynamicview.parser.node.DynamicNodeFactory;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
 import com.benny.library.dynamicview.parser.property.NodeProperties;
@@ -31,10 +32,10 @@ public class XMLLayoutParser {
         ViewIdGenerator viewIdGenerator = new ViewIdGenerator();
 
         parser.setInput(new StringReader(xml));
-        DynamicViewNode currentNode = null;
+        DynamicNode currentNode = null;
         for (int event; (event = parser.getEventType()) != XmlPullParser.END_DOCUMENT; ) {
             if (event == XmlPullParser.START_TAG) {
-                DynamicViewNode viewNode = parseNode(parser, viewIdGenerator);
+                DynamicNode viewNode = parseNode(parser, viewIdGenerator);
                 if (currentNode != null) {
                     currentNode.addChild(viewNode);
                 }
@@ -58,10 +59,10 @@ public class XMLLayoutParser {
             }
             parser.next();
         }
-        return new DynamicViewTree(currentNode);
+        return new DynamicViewTree((DynamicViewNode) currentNode);
     }
 
-    private DynamicViewNode parseNode(XmlPullParser parser, ViewIdGenerator viewIdGenerator) throws Exception {
+    private DynamicNode parseNode(XmlPullParser parser, ViewIdGenerator viewIdGenerator) throws Exception {
         String className = parser.getName();
         NodeProperties properties = parseAttributes(parser, viewIdGenerator);
         return DynamicNodeFactory.create(className, properties);

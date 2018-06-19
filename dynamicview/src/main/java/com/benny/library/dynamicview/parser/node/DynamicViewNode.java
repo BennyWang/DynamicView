@@ -3,41 +3,33 @@ package com.benny.library.dynamicview.parser.node;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 
 import com.benny.library.dynamicview.parser.property.NodeProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
 import com.benny.library.dynamicview.view.ViewBinder;
 
-public class DynamicViewNode {
-    private DynamicViewNode parent;
+import java.util.ArrayList;
+import java.util.List;
 
-    protected String name;
-    protected NodeProperties properties;
+public class DynamicViewNode extends DynamicNode {
+    private List<DynamicAnimatorNode> animators = new ArrayList<>();
 
     public DynamicViewNode(String className, NodeProperties properties) {
-        this.name = className;
-        this.properties = properties;
+        super(className, properties);
     }
 
-    public boolean isRoot() {
-        return parent == null;
-    }
+    @Override
+    public boolean addChild(DynamicNode child) {
+        if (child instanceof DynamicAnimatorNode) {
+            child.setParent(this);
+            animators.add((DynamicAnimatorNode) child);
+            return true;
+        }
 
-    protected void setParent(DynamicViewNode parent) {
-        this.parent = parent;
-    }
-
-    public DynamicViewNode getParent() {
-        return parent;
-    }
-
-    public String getProperty(String key) {
-        return properties.get(key);
-    }
-
-    public void addChild(DynamicViewNode child) {
-        throw new RuntimeException("View node " + name + " dose not allow add child");
+        return false;
     }
 
     public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
@@ -48,9 +40,19 @@ public class DynamicViewNode {
         }
 
         viewBinder.add(builder, properties);
+        viewBinder.addAnimation(createAnimation(builder.getView()));
         properties.set(builder);
         properties.setAction(builder, viewBinder.getActionProcessor());
 
         return builder.getView();
+    }
+
+    private Animation createAnimation(View view) {
+        AnimationSet animationSet = new AnimationSet(true);
+        for (DynamicAnimatorNode node : animators) {
+            animationSet.addAnimation(node.createAnimation());
+        }
+        view.setAnimation(animationSet);
+        return animationSet;
     }
 }

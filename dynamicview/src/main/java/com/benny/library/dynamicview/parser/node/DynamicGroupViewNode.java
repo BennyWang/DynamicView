@@ -18,9 +18,13 @@ public class DynamicGroupViewNode extends DynamicViewNode {
     }
 
     @Override
-    public void addChild(DynamicViewNode child) {
-        child.setParent(this);
-        children.add(child);
+    public boolean addChild(DynamicNode child) {
+        if (!super.addChild(child)) {
+            child.setParent(this);
+            children.add((DynamicViewNode) child);
+        }
+
+        return true;
     }
 
     @Override

@@ -10,19 +10,23 @@ import java.util.Map;
 public class DynamicNodeFactory {
     private static Map<Class, Class> viewTypeMap = new HashMap<>();
 
-    public static DynamicViewNode create(String name, NodeProperties properties) throws Exception {
-            Class<?> clazz = DynamicViewBuilderFactory.register(name);
-            Class<?> viewType = getViewType(clazz);
-            if (viewType == ViewType.View.class) {
-                return new DynamicViewNode(name, properties);
-            }
-            else if (viewType == ViewType.GroupView.class) {
-                return new DynamicGroupViewNode(name, properties);
-            }
-            else if (viewType == ViewType.AdapterView.class) {
-                return new DynamicAdapterViewNode(name, properties);
-            }
-            throw new Exception("Unknown node " + name);
+    public static DynamicNode create(String name, NodeProperties properties) throws Exception {
+        if (name.equals("animator")) {
+            return new DynamicAnimatorNode(name, properties);
+        }
+
+        Class<?> clazz = DynamicViewBuilderFactory.register(name);
+        Class<?> viewType = getViewType(clazz);
+        if (viewType == ViewType.View.class) {
+            return new DynamicViewNode(name, properties);
+        }
+        else if (viewType == ViewType.GroupView.class) {
+            return new DynamicGroupViewNode(name, properties);
+        }
+        else if (viewType == ViewType.AdapterView.class) {
+            return new DynamicAdapterViewNode(name, properties);
+        }
+        throw new Exception("Unknown node " + name);
     }
 
     private static Class<?> getViewType(Class<?> clazz) {

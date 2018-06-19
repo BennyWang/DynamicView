@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class ViewDefinitions {
@@ -15,11 +14,13 @@ public class ViewDefinitions {
         List<ViewDefinition> viewDefs = new ArrayList<>();
 
         StringBuilder builder = new StringBuilder();
-        builder.append("<RBox sn='000001'>");
+        builder.append("<RBox sn='000001' size='match'>");
         builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>");
-        builder.append("<Text text='{title}' onClick='(TITLE_CLICK)' fontSize='20' color='black'/>");
+        builder.append("<Text text='{title}' onClick='(TITLE_CLICK)' fontSize='20' color='black'>");
+        builder.append("<animator type='scale' duration='500'/>");
+        builder.append("</Text>");
         builder.append("<Text text='金额' margin='0 10 0 0'/>");
-        builder.append("<RBox><Text name='money' text='{money}' onClick='({money})'fontSize='28' color='black'/><Text rightOf='@money' alignBaseline='@money' text='元'/></RBox>");
+        builder.append("<RBox><animator type='translate' fromX='0' toX='0.6' repeatCount='3' repeatMode='2' duration='1000'/><Text name='money' text='{money}' onClick='({money})'fontSize='28' color='black'/><Text rightOf='@money' alignBaseline='@money' text='元'/></RBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
         builder.append("<VBox margin='0 10 0 0'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
         builder.append("</Grid>");

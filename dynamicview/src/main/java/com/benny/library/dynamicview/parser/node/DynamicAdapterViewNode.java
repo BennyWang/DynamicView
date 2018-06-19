@@ -13,26 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicAdapterViewNode extends DynamicViewNode {
-    private List<DynamicViewNode> children = new ArrayList<>();
+    private DynamicViewNode adapter;
 
     public DynamicAdapterViewNode(String className, NodeProperties properties) {
         super(className, properties);
     }
 
     @Override
-    public void addChild(DynamicViewNode child) {
-        if (!children.isEmpty()) {
-            throw new RuntimeException("View node " + name + " only allow one child");
+    public boolean addChild(DynamicNode child) {
+        if (!super.addChild(child)) {
+            if (adapter != null) {
+                throw new RuntimeException("View node " + name + " only allow one child");
+            }
+            child.setParent(this);
+            adapter = (DynamicViewNode) child;
         }
-
-        child.setParent(this);
-        children.add(child);
+        return true;
     }
 
     public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
         View view = super.createView(context, parent, viewBinder);
-        if (children.size() > 0) {
-            ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(children.get(0), viewBinder.getActionProcessor()));
+        if (adapter != null) {
+            ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(adapter, viewBinder.getActionProcessor()));
         }
         return view;
     }
