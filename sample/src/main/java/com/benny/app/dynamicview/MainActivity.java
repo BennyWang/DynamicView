@@ -1,21 +1,17 @@
 package com.benny.app.dynamicview;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.benny.library.dynamicview.DynamicViewEngine;
 import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.widget.Image;
-import com.benny.library.dynamicview.widget.Text;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -114,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void processAction(View view, String tag, JSONObject data) {
                         Toast.makeText(MainActivity.this, "target: " + view + " trigger action " + tag + " with data " + data, Toast.LENGTH_SHORT).show();
+                        if (tag.equals("image_click")) {
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        }
                     }
                 });
             }

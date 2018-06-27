@@ -60,6 +60,10 @@ public class NodeProperties {
     }
 
     public void set(DynamicViewBuilder builder, ActionProcessor processor, JSONObject data) {
+        for (Map.Entry<String, StaticProperty> entry : staticProperties.entrySet()) {
+            entry.getValue().set(builder);
+        }
+
         for (Map.Entry<String, DynamicProperty> entry : dynamicProperties.entrySet()) {
             entry.getValue().set(builder, data);
         }

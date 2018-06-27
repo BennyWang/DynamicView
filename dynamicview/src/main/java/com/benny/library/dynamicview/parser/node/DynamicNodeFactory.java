@@ -35,14 +35,14 @@ public class DynamicNodeFactory {
             return viewType;
         }
 
-        if (ViewType.View.class.isAssignableFrom(clazz)) {
-            viewTypeMap.put(clazz, ViewType.View.class);
-        }
-        else if (ViewType.GroupView.class.isAssignableFrom(clazz)) {
+        if (ViewType.GroupView.class.isAssignableFrom(clazz)) {
             viewTypeMap.put(clazz, ViewType.GroupView.class);
         }
         else if (ViewType.AdapterView.class.isAssignableFrom(clazz)) {
             viewTypeMap.put(clazz, ViewType.AdapterView.class);
+        }
+        else if (ViewType.View.class.isAssignableFrom(clazz)) {
+            viewTypeMap.put(clazz, ViewType.View.class);
         }
         return viewTypeMap.get(clazz);
     }

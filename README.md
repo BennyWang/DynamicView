@@ -7,7 +7,7 @@ DynamicView
 ```xml
 <RBox sn='000001'>
     <VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>
-        <Text text='{title}' fontSize='20' color='black'/>
+        <Text text='{title}' fontSize='20' color='black' theme_id='DUOQU_BOX_ddddd'/>
         <Text text='金额' margin='0 10 0 0'/>
         <RBox>
             <Text name='money' text='{money}' fontSize='28' color='black'/>

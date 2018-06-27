@@ -16,13 +16,13 @@ public class ViewDefinitions {
         StringBuilder builder = new StringBuilder();
         builder.append("<RBox sn='000001' size='match'>");
         builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>");
-        builder.append("<Text text='{title}' onClick='(TITLE_CLICK)' fontSize='20' color='black'>");
-        builder.append("<animator type='scale' duration='500'/>");
-        builder.append("</Text>");
-        builder.append("<Text text='金额' margin='0 10 0 0'/>");
-        builder.append("<RBox><animator type='translate' fromX='0' toX='0.6' repeatCount='3' repeatMode='2' duration='1000'/><Text name='money' text='{money}' onClick='({money})'fontSize='28' color='black'/><Text rightOf='@money' alignBaseline='@money' text='元'/></RBox>");
+        builder.append("<Label onClick='(TITLE_CLICK)' fontSize='20' color='black' text='{title}'>");
+        builder.append("</Label>");
+        builder.append("<Label margin='0 10 0 0' text='金额'/>");
+        builder.append("<RBox><Label name='money' onClick='({money})'fontSize='28' color='black' text='{money}'/>");
+        builder.append("<Label rightOf='@money' alignBaseline='@money' text='元'/></RBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
-        builder.append("<VBox margin='0 10 0 0'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
+        builder.append("<VBox margin='0 10 0 0'><Label text='{name}'/><Label color='black' text='{value}'/></VBox>");
         builder.append("</Grid>");
         builder.append("</VBox>");
         builder.append("</RBox>");
@@ -33,11 +33,11 @@ public class ViewDefinitions {
         builder = new StringBuilder();
         builder.append("<RBox sn='000002'>");
         builder.append("<VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14' size='match wrap'>");
-        builder.append("<Text text='{title}' onClick='({title})' color='black'/>");
-        builder.append("<Text text='还款金额' margin='0 10 0 0'/>");
-        builder.append("<HBox><Text text='{money}' fontSize='28' color='black'/><Text text='人民币'/></HBox>");
+        builder.append("<Label onClick='({title})' color='black' text='{title}' />");
+        builder.append("<Label margin='0 10 0 0' text='还款金额' />");
+        builder.append("<HBox><Label fontSize='28' color='black' text='{money}' /><Label text='人民币'/></HBox>");
         builder.append("<Grid spanCount='2' dataSource='{items}'>");
-        builder.append("<VBox margin='0 10 0 0' onClick='(ITEM_CLICK)'><Text text='{name}'/><Text text='{value}' color='black'/></VBox>");
+        builder.append("<VBox margin='0 10 0 0' onClick='(ITEM_CLICK)'><Label text='{name}'/><Label color='black' text='{value}'/></VBox>");
         builder.append("</Grid>");
         builder.append("</VBox>");
         builder.append("</RBox>");
@@ -52,7 +52,7 @@ public class ViewDefinitions {
         viewDefs.add(new ViewDefinition(builder.toString(), getRepaymentData("2000.98", "20465.36元"), 1));
 
         builder = new StringBuilder();
-        builder.append("<Image sn='000003' size='100 100' src='res://ic_launcher' scale='fitCenter'/>");
+        builder.append("<Image sn='000003' size='100 100' src='res://ic_launcher' onClick='(image_click)' scale='fitCenter'/>");
         viewDefs.add(new ViewDefinition(builder.toString(), new JSONObject(), 2));
         return viewDefs;
     }
@@ -69,12 +69,12 @@ public class ViewDefinitions {
             item.put("value", "*9921");
             items.put(item);
             item = new JSONObject();
-            item.put("name", "类型");
-            item.put("value", "支付平台网上支付");
-            items.put(item);
-            item = new JSONObject();
             item.put("name", "余额");
             item.put("value", remaining);
+            items.put(item);
+            item = new JSONObject();
+            item.put("name", "类型");
+            item.put("value", "支付平台网上支付");
             items.put(item);
             item = new JSONObject();
             item.put("name", "时间");

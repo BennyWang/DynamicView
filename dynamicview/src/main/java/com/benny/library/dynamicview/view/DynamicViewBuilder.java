@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.util.ViewUtils;
 import com.benny.library.dynamicview.view.setter.BackgroundSetter;
 import com.benny.library.dynamicview.view.setter.LayoutGravitySetter;
 import com.benny.library.dynamicview.view.setter.MarginSetter;
@@ -41,6 +42,9 @@ public abstract class DynamicViewBuilder {
         switch (key) {
             case "id":
                 view.setId(Integer.parseInt((String) value));
+                return true;
+            case "themeId":
+                ViewUtils.setThemeId(view, (String) value);
                 return true;
             case MarginSetter.PROPERTY:
                 marginSetter.setMargin(view, (String) value);
@@ -95,6 +99,14 @@ public abstract class DynamicViewBuilder {
         }
 
         return Long.parseLong(value.toString());
+    }
+
+    protected float toFloat(Object value) {
+        if (value instanceof Number) {
+            ((Number) value).floatValue();
+        }
+
+        return Float.parseFloat(value.toString());
     }
 
     protected double toDouble(Object value) {
