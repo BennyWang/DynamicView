@@ -8,6 +8,14 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class WeightSetter {
     public static final String PROPERTY = "weight";
+    private static WeightSetter instance;
+
+    public static WeightSetter getInstance() {
+        if (instance == null) {
+            instance = new WeightSetter();
+        }
+        return instance;
+    }
 
     public void setWeight(View view, String weight) {
         ViewGroup.LayoutParams lparams = view.getLayoutParams();

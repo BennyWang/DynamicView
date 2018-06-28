@@ -59,7 +59,7 @@ public class DynamicProperty {
             }
         }
         catch (Exception e) {
-            Log.e("DynamicViewEngine", "DynamicProperty.set exception " + Log.getStackTraceString(e));
+            Log.e("DynamicViewEngineImpl", "DynamicProperty.set exception " + Log.getStackTraceString(e));
         }
     }
 }

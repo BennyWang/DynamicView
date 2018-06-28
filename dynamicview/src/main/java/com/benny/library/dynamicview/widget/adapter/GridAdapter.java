@@ -5,11 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.DynamicViewEngine;
-import com.benny.library.dynamicview.view.ViewInflater;
+import com.benny.library.dynamicview.parser.ViewInflater;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -39,7 +37,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).notifyDataChange(getItem(position));
+        ((ViewHolder) holder).notifyDataChange(inflater, getItem(position));
     }
 
     @Override
@@ -60,8 +58,8 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
         }
 
-        void notifyDataChange(JSONObject data) {
-            DynamicViewEngine.bindView(itemView, data);
+        void notifyDataChange(ViewInflater inflater, JSONObject data) {
+            inflater.bind(itemView, data);
         }
     }
 }

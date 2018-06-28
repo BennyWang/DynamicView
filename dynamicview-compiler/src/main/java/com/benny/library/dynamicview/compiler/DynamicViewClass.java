@@ -79,7 +79,7 @@ public class DynamicViewClass {
         result.addSuperinterface(TypeVariableName.get(typeName));
         MethodSpec.Builder setViewCreatorMethod = MethodSpec.methodBuilder("setInflater")
                 .addModifiers(PUBLIC)
-                .addParameter(TypeVariableName.get("com.benny.library.dynamicview.view.ViewInflater"), "inflater");
+                .addParameter(TypeVariableName.get("com.benny.library.dynamicview.parser.ViewInflater"), "inflater");
         result.addMethod(setViewCreatorMethod.build());
 
         MethodSpec.Builder setDataSourceMethod = MethodSpec.methodBuilder("setDataSource")

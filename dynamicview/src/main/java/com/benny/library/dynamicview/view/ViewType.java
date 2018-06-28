@@ -1,5 +1,7 @@
 package com.benny.library.dynamicview.view;
 
+import com.benny.library.dynamicview.parser.ViewInflater;
+
 import org.json.JSONArray;
 
 public class ViewType {

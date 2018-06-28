@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.LruCache;
 
-import com.benny.library.dynamicview.util.ViewUtils;
+import com.benny.library.dynamicview.util.ThemeUtils;
 
 public class ColorProperty {
     private static LruCache<String, ColorProperty> cache = new LruCache<>(10);
@@ -50,6 +50,6 @@ public class ColorProperty {
             return defaultColor;
         }
 
-        return ViewUtils.getThemeColor(themeId, defaultColor);
+        return ThemeUtils.getThemeColor(themeId, defaultColor);
     }
 }

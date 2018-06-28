@@ -14,7 +14,7 @@ public class DynamicViewBuilderFactory {
 
         long tick = System.currentTimeMillis();
         builder.createView(context);
-        Log.e("DynamicViewEngine", "create view " + name + " cost " + (System.currentTimeMillis() - tick));
+        Log.e("DynamicViewEngineImpl", "create view " + name + " cost " + (System.currentTimeMillis() - tick));
         return builder;
     }
 

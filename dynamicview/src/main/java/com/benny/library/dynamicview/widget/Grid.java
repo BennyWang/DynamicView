@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.benny.library.dynamicview.annotations.DynamicView;
-import com.benny.library.dynamicview.view.ViewInflater;
+import com.benny.library.dynamicview.parser.ViewInflater;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.widget.adapter.GridAdapter;
 

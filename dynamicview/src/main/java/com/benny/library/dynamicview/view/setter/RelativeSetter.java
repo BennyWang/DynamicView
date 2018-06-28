@@ -19,9 +19,17 @@ public class RelativeSetter {
     private static final String ALIGN_BOTTOM = "alignBottom";
     private static final String ALIGN_BASELINE = "alignBaseline";
 
+    private static RelativeSetter instance;
     private static Map<String, Integer> PROPERTIES = new HashMap<>();
 
-    public boolean canHandle(String prop) {
+    public static RelativeSetter getInstance() {
+        if (instance == null) {
+            instance = new RelativeSetter();
+        }
+        return instance;
+    }
+
+    public static boolean canHandle(String prop) {
         return PROPERTIES.containsKey(prop);
     }
 

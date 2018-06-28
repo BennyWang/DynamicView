@@ -10,6 +10,14 @@ import com.benny.library.dynamicview.view.property.DrawableProperty;
 
 public class BackgroundSetter {
     public static final String PROPERTY = "background";
+    private static BackgroundSetter instance;
+
+    public static BackgroundSetter getInstance() {
+        if (instance == null) {
+            instance = new BackgroundSetter();
+        }
+        return instance;
+    }
 
     public void setBackground(View view, String background) {
         if (background.startsWith("res://")) {

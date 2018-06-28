@@ -9,6 +9,14 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class MarginSetter {
     public static final String PROPERTY = "margin";
+    private static MarginSetter instance;
+
+    public static MarginSetter getInstance() {
+        if (instance == null) {
+            instance = new MarginSetter();
+        }
+        return instance;
+    }
 
     public void setMargin(View view, String margin) {
         ViewGroup.MarginLayoutParams lparams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();

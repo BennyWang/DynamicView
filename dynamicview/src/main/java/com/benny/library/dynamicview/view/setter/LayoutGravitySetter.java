@@ -11,6 +11,14 @@ import com.benny.library.dynamicview.view.property.GravityProperty;
 
 public class LayoutGravitySetter {
     public static final String PROPERTY = "gravity";
+    private static LayoutGravitySetter instance;
+
+    public static LayoutGravitySetter getInstance() {
+        if (instance == null) {
+            instance = new LayoutGravitySetter();
+        }
+        return instance;
+    }
 
     public void setGravity(View view, String value) {
         ViewGroup.LayoutParams lparams = view.getLayoutParams();

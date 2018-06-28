@@ -4,6 +4,14 @@ import android.view.View;
 
 public class VisibilitySetter {
     public static final String PROPERTY = "visibility";
+    private static VisibilitySetter instance;
+
+    public static VisibilitySetter getInstance() {
+        if (instance == null) {
+            instance = new VisibilitySetter();
+        }
+        return instance;
+    }
 
     public void setVisibility(View view, String value) {
         switch (value) {

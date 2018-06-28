@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.benny.library.dynamicview.DynamicViewEngine;
+import com.benny.library.dynamicview.DynamicViewEngineImpl;
 import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.widget.Image;
 
@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         map.put("title", "Hello World");
         map.put("logo", "http://avatar.csdn.net/8/B/B/1_sinyu890807.jpg");
         try {
-            DynamicViewEngine.getInstance().compile(xml);
+            DynamicViewEngineImpl.getInstance().compile(xml);
             for (int i = 0; i < 5; ++i) {
-                View view = DynamicViewEngine.getInstance().inflate(MainActivity.this, vContainer, xml);
-                DynamicViewEngine.bindView(view, map);
+                View view = DynamicViewEngineImpl.getInstance().inflate(MainActivity.this, vContainer, xml);
+                DynamicViewEngineImpl.getInstance().bindView(view, new JSONObject(map));
             }
         }
         catch (Exception ignored) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private void inflateAdapterViews() {
         String xml = "<Grid sn=\"123456789\" dataSource=\"{items}\"><RBox><Image src=\"{logo}\" width=\"100\" height=\"100\"/><Text text=\"{title}\" padding=\"30\" gravity=\"center|end\" background=\"red 10\"/></RBox></Grid>";
         try {
-            DynamicViewEngine.getInstance().compile(xml);
+            DynamicViewEngineImpl.getInstance().compile(xml);
 
             Map<String, String> map = new HashMap<>();
             JSONArray items = new JSONArray();
@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
             map.put("items", items.toString());
 
             for (int i = 0; i < 5; ++i) {
-                View view = DynamicViewEngine.getInstance().inflate(MainActivity.this, vContainer, xml);
-                DynamicViewEngine.bindView(view, map);
+                View view = DynamicViewEngineImpl.getInstance().inflate(MainActivity.this, vContainer, xml);
+                DynamicViewEngineImpl.getInstance().bindView(view, new JSONObject(map));
             }
         }
         catch (Exception ignored) {
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewDefinitions.ViewDefinition viewDefinition = getItem(position);
             if (convertView == null) {
-                convertView = DynamicViewEngine.getInstance().inflate(MainActivity.this, null, viewDefinition.layout);
-                DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
+                convertView = DynamicViewEngineImpl.getInstance().inflate(MainActivity.this, null, viewDefinition.layout);
+                DynamicViewEngineImpl.getInstance().setActionProcessor(convertView, new ActionProcessor() {
                     @Override
                     public void processAction(View view, String tag, JSONObject data) {
                         Toast.makeText(MainActivity.this, "target: " + view + " trigger action " + tag + " with data " + data, Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-            DynamicViewEngine.bindView(convertView, viewDefinition.data);
+            DynamicViewEngineImpl.getInstance().bindView(convertView, viewDefinition.data);
             return convertView;
         }
 

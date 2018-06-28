@@ -1,13 +1,11 @@
 package com.benny.library.dynamicview.widget.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.benny.library.dynamicview.DynamicViewEngine;
-import com.benny.library.dynamicview.view.ViewInflater;
+import com.benny.library.dynamicview.parser.ViewInflater;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,7 +45,7 @@ public class TableAdapter extends BaseAdapter {
                 convertView = inflater.inflate(parent.getContext(), null);
             }
 
-            DynamicViewEngine.bindView(convertView, getItem(position));
+            inflater.bind(convertView, getItem(position));
             return convertView;
         }
         catch (Exception e) {

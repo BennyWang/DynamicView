@@ -107,7 +107,7 @@ ViewType有三种
 <tr><td>align</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用\|分隔，<font color=#A52A2A>容器类和Text具有此属性，控制子元素的对齐方式</td></tr>
 </table>
 
- Text
+ Text|Label(Label使用StaticLayout进行封装，性能好于Text)
 <table>
 <tr><th>名称 </th><th> 格式(N表示数值，S表示字符串) </th><th> 说明 </th></tr>
 <tr><td>text</td><td> S </td><td>文本内容</td></tr>

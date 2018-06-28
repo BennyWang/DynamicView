@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 import com.benny.library.dynamicview.action.ActionProcessor;
 import com.benny.library.dynamicview.view.ViewBinder;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
-import com.benny.library.dynamicview.view.ViewInflater;
 
 import org.json.JSONObject;
-
-import java.util.Map;
 
 public class DynamicViewTree implements ViewInflater {
     private static final int KEY_BINDERS = 1 + 2 << 24;
@@ -39,6 +36,11 @@ public class DynamicViewTree implements ViewInflater {
         }
         contentView.setTag(KEY_BINDERS, viewBinder);
         return contentView;
+    }
+
+    @Override
+    public void bind(View view, JSONObject data) {
+        bindView(view, data);
     }
 
     public static void setActionProcessor(View view, ActionProcessor processor) {
