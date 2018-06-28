@@ -4,12 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import com.benny.library.dynamicview.widget.Image;
+import com.benny.library.dynamicview.api.ImageLoader;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
 
-public class GlideImageLoader implements Image.ImageLoader {
+public class GlideImageLoader implements ImageLoader {
     private static String basePath;
 
     public static void setBasePath(String path) {

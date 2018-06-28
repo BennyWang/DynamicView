@@ -1,1 +1,1 @@
-include ':sample', ':dynamicview', ':dynamicview-annotations', ':dynamicview-compiler'
+include ':sample', ':dynamicview', ':dynamicview-annotations', ':dynamicview-compiler', ':dynamicview-api'

@@ -1,7 +1,6 @@
 package com.benny.library.dynamicview.util;
 
-import com.benny.library.dynamicview.DynamicViewEngineImpl;
-import com.benny.library.dynamicview.ThemeManager;
+import com.benny.library.dynamicview.api.ThemeManager;
 
 public class ThemeUtils {
     private static ThemeManager manager;

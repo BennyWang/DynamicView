@@ -2,7 +2,7 @@ package com.benny.library.dynamicview.parser.property;
 
 import android.text.TextUtils;
 
-import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.api.ActionProcessor;
 import com.benny.library.dynamicview.util.ViewIdGenerator;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 

@@ -1,6 +1,6 @@
 package com.benny.library.dynamicview.parser.property;
 
-import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.api.ActionProcessor;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
 import org.json.JSONObject;

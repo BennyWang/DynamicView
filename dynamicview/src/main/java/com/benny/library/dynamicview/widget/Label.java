@@ -11,6 +11,7 @@ import android.util.LruCache;
 import android.view.View;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
+import com.benny.library.dynamicview.api.LayoutCache;
 import com.benny.library.dynamicview.util.PropertyUtils;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.view.property.ColorProperty;
@@ -91,11 +92,6 @@ public class Label extends View implements ViewType.View {
 
         int heightSize = layout.getHeight() + getPaddingTop() + getPaddingBottom();
         setMeasuredDimension(widthSize, heightSize);
-    }
-
-    public interface LayoutCache {
-        Layout get(Context context, String key);
-        Layout put(Context context, String key, Layout value);
     }
 
     static class LayoutManager {

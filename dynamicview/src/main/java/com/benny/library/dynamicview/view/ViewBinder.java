@@ -4,14 +4,13 @@ import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 
-import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.api.ActionProcessor;
 import com.benny.library.dynamicview.parser.property.NodeProperties;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ViewBinder {
     private List<Animation> animations = new ArrayList<>();

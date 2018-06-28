@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
+import com.benny.library.dynamicview.api.ImageLoader;
 import com.benny.library.dynamicview.util.ResourceUtils;
 import com.benny.library.dynamicview.view.ViewType;
 
@@ -39,10 +40,6 @@ public class Image extends ImageView implements ViewType.View {
         if (SCALE_TYPES.containsKey(scale)) {
             setScaleType(SCALE_TYPES.get(scale));
         }
-    }
-
-    public interface ImageLoader {
-        void loadImage(String src, ImageView view);
     }
 
     static {

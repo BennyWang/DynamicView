@@ -5,7 +5,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.benny.library.dynamicview.action.ActionProcessor;
+import com.benny.library.dynamicview.api.ActionProcessor;
+import com.benny.library.dynamicview.api.DynamicViewEngine;
+import com.benny.library.dynamicview.api.ImageLoader;
+import com.benny.library.dynamicview.api.LayoutCache;
+import com.benny.library.dynamicview.api.ThemeManager;
 import com.benny.library.dynamicview.parser.XMLLayoutParser;
 import com.benny.library.dynamicview.parser.DynamicViewTree;
 import com.benny.library.dynamicview.util.ThemeUtils;
@@ -32,23 +36,24 @@ public class DynamicViewEngineImpl implements DynamicViewEngine, XMLLayoutParser
         return instance;
     }
 
-    public DynamicViewTree compile(String xml) throws Exception {
-        DynamicViewTree viewTree = parser.parseDocument(xml);
-        String serialNumber = viewTree.getRoot().getProperty("sn");
-        if (!viewTreeMap.containsKey(serialNumber)) {
-            viewTreeMap.put(serialNumber, viewTree);
+    public void compile(String xml) {
+        try {
+            preprocess(xml);
         }
-        return viewTree;
+        catch (Exception e) {
+            Log.e("DynamicViewEngineImpl", "compile Exception: " + Log.getStackTraceString(e));
+        }
+
     }
 
     public View inflate(Context context, ViewGroup parent, String xml) {
         long tick = System.currentTimeMillis();
         try {
-            DynamicViewTree viewTree = compile(xml);
+            DynamicViewTree viewTree = preprocess(xml);
             return viewTree.inflate(context, parent);
         }
         catch (Exception e) {
-            Log.e("DynamicViewEngineImpl", "inflate Exception: " + e);
+            Log.e("DynamicViewEngineImpl", "inflate Exception: " + Log.getStackTraceString(e));
             return null;
         }
         finally {
@@ -65,12 +70,12 @@ public class DynamicViewEngineImpl implements DynamicViewEngine, XMLLayoutParser
     }
 
     @Override
-    public void setImageLoader(Image.ImageLoader loader) {
+    public void setImageLoader(ImageLoader loader) {
         Image.setImageLoader(loader);
     }
 
     @Override
-    public void setLayoutCache(Label.LayoutCache cache) {
+    public void setLayoutCache(LayoutCache cache) {
         Label.setLayoutCache(cache);
     }
 
@@ -81,5 +86,14 @@ public class DynamicViewEngineImpl implements DynamicViewEngine, XMLLayoutParser
     @Override
     public DynamicViewTree onReceive(String serialNumber) {
         return viewTreeMap.get(serialNumber);
+    }
+
+    private DynamicViewTree preprocess(String xml) throws Exception {
+        DynamicViewTree viewTree = parser.parseDocument(xml);
+        String serialNumber = viewTree.getRoot().getProperty("sn");
+        if (!viewTreeMap.containsKey(serialNumber)) {
+            viewTreeMap.put(serialNumber, viewTree);
+        }
+        return viewTree;
     }
 }
