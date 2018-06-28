@@ -17,11 +17,11 @@ public class ViewUtils {
         return (String) view.getTag(KEY_THEME_ID);
     }
 
-    public static int getThemeColor(Context context, String themeId) {
+    public static int getThemeColor(String themeId, int fallback) {
         ThemeManager themeManager = DynamicViewEngine.getInstance().getThemeManager();
         if (themeId != null && themeManager != null) {
-            return themeManager.getThemeColor(context, themeId);
+            return themeManager.getThemeColor(themeId, fallback);
         }
-        return -1;
+        return fallback;
     }
 }

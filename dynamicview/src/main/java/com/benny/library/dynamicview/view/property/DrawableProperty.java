@@ -36,12 +36,12 @@ public class DrawableProperty {
     private DrawableProperty(Context context, String value) {
         int endOfColor = value.indexOf(" ");
         if (endOfColor == -1) {
-            drawableMaker = new ColorDrawableMaker(Color.parseColor(value));
+            drawableMaker = new ColorDrawableMaker(ColorProperty.of(context, value));
         }
         else {
             String color = value.substring(0, endOfColor);
             String radius = value.substring(endOfColor).trim();
-            drawableMaker = new ShapeDrawableMaker(RadiusProperty.of(context, radius), Color.parseColor(color));
+            drawableMaker = new ShapeDrawableMaker(RadiusProperty.of(context, radius), ColorProperty.of(context, color));
         }
     }
 
@@ -50,23 +50,23 @@ public class DrawableProperty {
     }
 
     private static class ColorDrawableMaker implements DrawableMaker {
-        private int color;
-        public ColorDrawableMaker(int color) {
-            this.color = color;
+        private ColorProperty colorProperty;
+        public ColorDrawableMaker(ColorProperty colorProperty) {
+            this.colorProperty = colorProperty;
         }
 
         public Drawable make() {
-            return new ColorDrawable(color);
+            return new ColorDrawable(colorProperty.getColor());
         }
     }
 
     private static class ShapeDrawableMaker implements DrawableMaker {
         private RadiusProperty radius;
-        private int color;
+        private ColorProperty colorProperty;
 
-        public ShapeDrawableMaker(RadiusProperty radius, int color) {
+        public ShapeDrawableMaker(RadiusProperty radius, ColorProperty colorProperty) {
             this.radius = radius;
-            this.color = color;
+            this.colorProperty = colorProperty;
         }
 
         @Override
@@ -74,7 +74,7 @@ public class DrawableProperty {
             Shape shape = new RoundRectShape(new float[] { radius.topLeft, radius.topLeft, radius.topRight, radius.topRight,
                     radius.bottomRight, radius.bottomRight, radius.topLeft, radius.bottomLeft }, null, null);
             ShapeDrawable shapeDrawable = new ShapeDrawable(shape);
-            shapeDrawable.getPaint().setColor(color);
+            shapeDrawable.getPaint().setColor(colorProperty.getColor());
             return shapeDrawable;
         }
     }

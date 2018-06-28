@@ -1,13 +1,11 @@
 package com.benny.library.dynamicview.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
-import com.benny.library.dynamicview.util.ViewUtils;
-import com.benny.library.dynamicview.view.ThemeManager;
+import com.benny.library.dynamicview.view.property.ColorProperty;
 import com.benny.library.dynamicview.view.property.GravityProperty;
 import com.benny.library.dynamicview.view.ViewType;
 
@@ -34,13 +32,8 @@ public class Text extends TextView implements ViewType.View {
     }
 
     public void setColor(String value) {
-        int color = ViewUtils.getThemeColor(getContext(), ViewUtils.getThemeId(this));
-        if (color > 0) {
-            setTextColor(color);
-        }
-        else {
-            setTextColor(Color.parseColor(value));
-        }
+        ColorProperty property = ColorProperty.of(getContext(), value);
+        setTextColor(property.getColor());
     }
 
     public void setStyle(String value) {

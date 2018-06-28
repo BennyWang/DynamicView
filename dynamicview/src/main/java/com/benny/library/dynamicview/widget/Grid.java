@@ -34,11 +34,7 @@ public class Grid extends RecyclerView implements ViewType.AdapterView {
     }
 
     public void setSpanCount(int spanCount) {
-        try {
-            layoutManager.setSpanCount(spanCount);
-        }
-        catch (Exception ignored) {
-        }
+        layoutManager.setSpanCount(spanCount);
     }
 
     @Override
