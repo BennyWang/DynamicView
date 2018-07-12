@@ -1,8 +1,8 @@
 package com.benny.library.dynamicview.parser.node;
 
-import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.parser.property.NodeProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
+import com.benny.library.dynamicview.view.ViewType;
 
 import java.util.HashMap;
 import java.util.Map;

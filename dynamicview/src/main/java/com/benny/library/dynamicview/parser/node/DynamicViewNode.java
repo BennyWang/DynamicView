@@ -9,7 +9,7 @@ import android.view.animation.AnimationSet;
 import com.benny.library.dynamicview.parser.property.NodeProperties;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 import com.benny.library.dynamicview.view.DynamicViewBuilderFactory;
-import com.benny.library.dynamicview.view.ViewBinder;
+import com.benny.library.dynamicview.view.ViewBinderImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class DynamicViewNode extends DynamicNode {
         return false;
     }
 
-    public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
+    public View createView(Context context, ViewGroup parent, ViewBinderImpl viewBinder) throws Exception {
         DynamicViewBuilder builder = DynamicViewBuilderFactory.create(context, name);
         // first add to parent, then set static property, for create correct LayoutParameter
         if (parent != null) {

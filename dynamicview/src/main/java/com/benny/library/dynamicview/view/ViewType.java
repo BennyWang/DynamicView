@@ -14,5 +14,6 @@ public class ViewType {
     public interface AdapterView {
         void setDataSource(JSONArray source);
         void setInflater(ViewInflater inflater);
+        void setRange(String range);
     }
 }

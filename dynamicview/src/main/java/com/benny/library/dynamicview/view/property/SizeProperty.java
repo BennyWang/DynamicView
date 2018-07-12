@@ -3,9 +3,10 @@ package com.benny.library.dynamicview.view.property;
 import android.content.Context;
 import android.util.LruCache;
 
+import com.benny.library.dynamicview.util.PropertyUtils;
+
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
 
 public class SizeProperty {
     private static LruCache<String, SizeProperty> cache = new LruCache<>(10);
@@ -43,7 +44,7 @@ public class SizeProperty {
         }
 
         try {
-            return dpToPx(context, Integer.parseInt(value));
+            return PropertyUtils.dpToPx(context, Integer.parseInt(value));
         }
         catch (Exception ignored) {
             return WRAP_CONTENT;

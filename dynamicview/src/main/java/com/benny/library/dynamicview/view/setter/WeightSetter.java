@@ -21,11 +21,15 @@ public class WeightSetter {
         ViewGroup.LayoutParams lparams = view.getLayoutParams();
         if (lparams == null) {
             lparams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            view.setLayoutParams(lparams);
+        }
+        else if (lparams instanceof ViewGroup.MarginLayoutParams) {
+            lparams = new LinearLayout.LayoutParams((ViewGroup.MarginLayoutParams) lparams);
+        }
+        else {
+            lparams = new LinearLayout.LayoutParams(lparams);
         }
 
-        if (lparams instanceof LinearLayout.LayoutParams) {
-            ((LinearLayout.LayoutParams) lparams).weight = Integer.parseInt(weight);
-        }
+        ((LinearLayout.LayoutParams) lparams).weight = Integer.parseInt(weight);
+        view.setLayoutParams(lparams);
     }
 }

@@ -5,8 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.api.ActionProcessor;
-import com.benny.library.dynamicview.view.ViewBinder;
+import com.benny.library.dynamicview.api.ViewBinder;
 import com.benny.library.dynamicview.parser.node.DynamicViewNode;
+import com.benny.library.dynamicview.view.ViewBinderImpl;
 
 import org.json.JSONObject;
 
@@ -24,12 +25,16 @@ public class DynamicViewTree implements ViewInflater {
         defaultProcessor = processor;
     }
 
-    public DynamicViewNode getRoot() {
-        return root;
+    public String getSerialNumber() {
+        return root == null ? "" : root.getProperty("sn");
+    }
+
+    public long getVersion() {
+        return root == null ? 0 : root.getLongProperty("version", 0);
     }
 
     public View inflate(Context context, ViewGroup parent) throws Exception {
-        ViewBinder viewBinder = new ViewBinder();
+        ViewBinderImpl viewBinder = new ViewBinderImpl();
         View contentView = root.createView(context, parent, viewBinder);
         if (defaultProcessor != null) {
             viewBinder.setActionProcessor(defaultProcessor);

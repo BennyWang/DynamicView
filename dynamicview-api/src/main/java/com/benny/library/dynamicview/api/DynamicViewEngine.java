@@ -6,16 +6,21 @@ import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
+import java.io.File;
+
 public interface DynamicViewEngine {
-    void compile(String xml) throws Exception;
+    void compile(String layout);
+    void compile(File layout);
+    void compileAll(File layout);
+
     View inflate(Context context, ViewGroup parent, String xml);
+    View inflateWithId(Context context, ViewGroup parent, String id);
     void bindView(View view, JSONObject data);
 
     void setThemeManager(ThemeManager manager);
     void setActionProcessor(View view, ActionProcessor processor);
-
     void setImageLoader(ImageLoader loader);
-    void setLayoutCache(LayoutCache cache);
+    void setHttpCacheProxy(HttpCacheProxy proxy);
 
 
 }

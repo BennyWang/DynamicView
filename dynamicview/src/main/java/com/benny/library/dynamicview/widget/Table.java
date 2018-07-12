@@ -3,14 +3,13 @@ package com.benny.library.dynamicview.widget;
 import android.content.Context;
 import android.widget.GridView;
 
-import com.benny.library.dynamicview.annotations.DynamicView;
 import com.benny.library.dynamicview.parser.ViewInflater;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.widget.adapter.TableAdapter;
 
 import org.json.JSONArray;
 
-@DynamicView
+@com.benny.library.dynamicview.annotations.DynamicView
 public class Table extends GridView implements ViewType.AdapterView {
     private TableAdapter adapter = new TableAdapter();
 
@@ -42,6 +41,11 @@ public class Table extends GridView implements ViewType.AdapterView {
     @Override
     public void setInflater(ViewInflater inflater) {
         adapter.setInflater(inflater);
+    }
+
+    @Override
+    public void setRange(String range) {
+        adapter.setRange(range);
     }
 
     @Override

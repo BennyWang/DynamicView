@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.benny.library.dynamicview.api.ActionProcessor;
+import com.benny.library.dynamicview.view.setter.BackgroundResSetter;
 import com.benny.library.dynamicview.view.setter.BackgroundSetter;
 import com.benny.library.dynamicview.view.setter.LayoutGravitySetter;
 import com.benny.library.dynamicview.view.setter.MarginSetter;
@@ -42,6 +43,9 @@ public abstract class DynamicViewBuilder {
             case BackgroundSetter.PROPERTY:
                 BackgroundSetter.getInstance().setBackground(view, (String) value);
                 return true;
+            case BackgroundResSetter.PROPERTY:
+                BackgroundResSetter.getInstance().setBackground(view, (String) value);
+                return true;
             case SizeSetter.PROPERTY:
                 SizeSetter.getInstance().setSize(view, (String) value);
                 return true;
@@ -77,7 +81,7 @@ public abstract class DynamicViewBuilder {
 
     protected int toInt(Object value) {
         if (value instanceof Number) {
-            ((Number) value).intValue();
+            return ((Number) value).intValue();
         }
 
         return Integer.parseInt(value.toString());
@@ -85,7 +89,7 @@ public abstract class DynamicViewBuilder {
 
     protected long toLong(Object value) {
         if (value instanceof Number) {
-            ((Number) value).intValue();
+            return ((Number) value).intValue();
         }
 
         return Long.parseLong(value.toString());
@@ -93,7 +97,7 @@ public abstract class DynamicViewBuilder {
 
     protected float toFloat(Object value) {
         if (value instanceof Number) {
-            ((Number) value).floatValue();
+            return ((Number) value).floatValue();
         }
 
         return Float.parseFloat(value.toString());
@@ -101,10 +105,18 @@ public abstract class DynamicViewBuilder {
 
     protected double toDouble(Object value) {
         if (value instanceof Number) {
-            ((Number) value).intValue();
+            return ((Number) value).intValue();
         }
 
         return Double.parseDouble(value.toString());
+    }
+
+    protected boolean toBoolean(Object value) {
+        if (value instanceof Number) {
+            return ((Number) value).intValue() != 0;
+        }
+
+        return Boolean.parseBoolean(value.toString());
     }
 
     protected String toString(Object value) {

@@ -1,0 +1,15 @@
+<Frame sn='layout00001' version='200'  size='match wrap' padding='20'>
+    <Linear size='match wrap' background='white 20' orientation='vertical'>
+        <Image size="match wrap" ratio='1.8' scale='centerCrop' src='{$article[0].original_link}' />
+        <Frame size="match wrap" ratio='1.8' >
+            <Video name="video" size="match match" src='http://mp4.vjshi.com/2015-05-11/1431320221859_786.mp4' autoPlay='false' />
+            <VideoController video="@video" thumbnail='{$article[0].original_link}' />
+        </Frame>
+        <Label size="match wrap" margin='10 5' text="{$article[0].title}" fontSize='14' />
+        <Label size="match wrap" margin='10 5' maxLines='2' visibility="{$article[0].main_text ? visible : gone}" text="{$article[0].main_text}" fontSize='14' />
+        <Divider size="match 1" background='black'/>
+        <List size='match wrap' orientation='horizontal' margin= "0 5 0 10" dataSource='{$action}'>
+            <Label onClick='(DO_ACTION)' size='0 wrap' color='blue' fontSize='14' weight='1' gravity='center' align='center' text='{$title}'/>
+        </List>
+    </Linear>
+</Frame>

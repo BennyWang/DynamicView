@@ -3,25 +3,26 @@ package com.benny.library.dynamicview.parser.property;
 import android.text.TextUtils;
 
 import com.benny.library.dynamicview.api.ActionProcessor;
+import com.benny.library.dynamicview.parser.expression.IllegalExprException;
 import com.benny.library.dynamicview.util.ViewIdGenerator;
 import com.benny.library.dynamicview.view.DynamicViewBuilder;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class NodeProperties {
     private ViewIdGenerator idGenerator;
-    private Map<String, StaticProperty> staticProperties = new HashMap<>();
-    private Map<String, DynamicProperty> dynamicProperties = new HashMap<>();
-    private Map<String, ActionProperty> actions = new HashMap<>();
+    private Map<String, StaticProperty> staticProperties = new LinkedHashMap<>();
+    private Map<String, DynamicProperty> dynamicProperties = new LinkedHashMap<>();
+    private Map<String, ActionProperty> actions = new LinkedHashMap<>();
 
     public NodeProperties(ViewIdGenerator idGenerator) {
         this.idGenerator = idGenerator;
     }
 
-    public void add(String key, String value) {
+    public void add(String key, String value) throws IllegalExprException {
         if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
             if (ActionProperty.canHandle(key, value)) {
                 actions.put(key, new ActionProperty(key, value));
@@ -29,12 +30,6 @@ public class NodeProperties {
             else if (DynamicProperty.canHandle(key, value)) {
                 DynamicProperty property = new DynamicProperty(key, value);
                 dynamicProperties.put(key, property);
-
-                // 如果存在默认值，添加到静态属性中
-                String defaultValue = property.getDefaultValue();
-                if (!TextUtils.isEmpty(defaultValue)) {
-                    processStaticProperty(key, defaultValue);
-                }
             } else {
                 processStaticProperty(key, value);
             }

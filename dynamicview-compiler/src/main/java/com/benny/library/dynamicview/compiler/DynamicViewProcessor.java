@@ -16,6 +16,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
@@ -58,7 +59,7 @@ public class DynamicViewProcessor extends AbstractProcessor {
     private void parsePropertySetter(Element element, Map<TypeElement, DynamicViewClass> targetClassMap) {
         DynamicViewClass dynamicViewClass = getOrCreateDynamicViewClass(targetClassMap, (TypeElement) element);
         for (Element member : element.getEnclosedElements()) {
-            if (member.getKind() != ElementKind.METHOD || !DynamicViewSetter.isValidSetterMethod((ExecutableElement) member)) {
+            if (member.getKind() != ElementKind.METHOD || member.getModifiers().contains(Modifier.STATIC) || !DynamicViewSetter.isValidSetterMethod((ExecutableElement) member)) {
                 continue;
             }
             dynamicViewClass.addSetter(new DynamicViewSetter((ExecutableElement) member));

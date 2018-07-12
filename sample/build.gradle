@@ -24,9 +24,15 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.danikula:videocache:2.7.0'
 
     implementation project(':dynamicview')
     annotationProcessor project(':dynamicview-compiler')
+
+    compile("com.github.hotchemi:permissionsdispatcher:3.1.0") {
+        exclude module: "support-v13"
+    }
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.1.0"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

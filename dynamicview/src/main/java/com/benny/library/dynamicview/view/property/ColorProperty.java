@@ -29,7 +29,7 @@ public class ColorProperty {
     }
 
     public ColorProperty(Context context, String value) {
-        if (value.startsWith("?")) {
+        if (value.startsWith("@")) {
             int splitIndex = value.indexOf(":");
             if (splitIndex == -1) {
                 themeId = value.substring(1);

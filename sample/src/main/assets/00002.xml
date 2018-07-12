@@ -1,0 +1,18 @@
+<Frame sn='layout00002' version='200'  size='match wrap' padding='20'>
+    <Linear size='match wrap' background='white 20' orientation='vertical'>
+    <Frame size='match wrap'>
+        <Image size="match wrap" ratio='1.8' scale='centerCrop' src='{$article[0].original_link}' />
+        <Label size="match wrap" margin='10 5' gravity="bottom" text="{$article[0].title}" fontSize='14' />
+    </Frame>
+    <List size="match wrap" orientation='vertical' dividerHeight='1' dividerColor='red' dividerMargin='10 0 60 0' range='1' dataSource='{$article}'>
+        <Relative size="match wrap" padding='5'>
+            <Image name="img" size="50 50" scale='centerCrop' gravity="end" src='{$original_link}' background='red'/>
+            <Label size="match wrap" leftOf="@img" gravity="center" margin="0 0 10 0" text="{$title}" fontSize='14' />
+        </Relative>
+    </List>
+    <Divider size="match 1" background='black'/>
+    <List size='match wrap' orientation='horizontal' margin= "0 5 0 10" dataSource='{$action}'>
+        <Label onClick='(DO_ACTION)' size='0 wrap' color='blue' fontSize='14' weight='1' gravity='center' align='center' text='{$title}'/>
+    </List>
+    </Linear>
+</Frame>

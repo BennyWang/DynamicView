@@ -3,7 +3,7 @@ package com.benny.library.dynamicview.view.property;
 import android.content.Context;
 import android.util.LruCache;
 
-import static com.benny.library.dynamicview.util.PropertyUtils.dpToPx;
+import com.benny.library.dynamicview.util.PropertyUtils;
 
 public class RadiusProperty {
     private static LruCache<String, RadiusProperty> cache = new LruCache<>(10);
@@ -44,7 +44,7 @@ public class RadiusProperty {
         String[] radius = value.split("\\s+");
         int[] intRadius = new int[radius.length];
         for (int i = 0; i < radius.length; ++i) {
-            intRadius[i] = dpToPx(context, Integer.parseInt(radius[i]));
+            intRadius[i] = PropertyUtils.dpToPx(context, Integer.parseInt(radius[i]));
         }
         return intRadius;
     }

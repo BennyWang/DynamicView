@@ -86,6 +86,11 @@ public class DynamicViewClass {
                 .addModifiers(PUBLIC)
                 .addParameter(TypeVariableName.get("org.json.JSONArray"), "dataSource");
         result.addMethod(setDataSourceMethod.build());
+
+        MethodSpec.Builder setRangeMethod = MethodSpec.methodBuilder("setRange")
+                .addModifiers(PUBLIC)
+                .addParameter(TypeVariableName.get("String"), "range");
+        result.addMethod(setRangeMethod.build());
     }
 
     private void createTargetField(TypeSpec.Builder result) {

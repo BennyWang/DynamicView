@@ -1,7 +1,5 @@
 package com.benny.library.dynamicview.parser.node;
 
-import android.text.TextUtils;
-
 import com.benny.library.dynamicview.parser.property.NodeProperties;
 
 public abstract class DynamicNode {

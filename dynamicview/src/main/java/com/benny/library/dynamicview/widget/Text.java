@@ -5,9 +5,9 @@ import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.benny.library.dynamicview.annotations.DynamicView;
+import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.view.property.ColorProperty;
 import com.benny.library.dynamicview.view.property.GravityProperty;
-import com.benny.library.dynamicview.view.ViewType;
 
 @DynamicView
 public class Text extends TextView implements ViewType.View {
@@ -23,6 +23,12 @@ public class Text extends TextView implements ViewType.View {
 
     public void setText(String text) {
         if (!text.contentEquals(getText())) {
+            super.setText(text);
+        }
+    }
+
+    public void setSpan(CharSequence text) {
+        if (!text.equals(getText())) {
             super.setText(text);
         }
     }
@@ -45,6 +51,10 @@ public class Text extends TextView implements ViewType.View {
                 setTypeface(getTypeface(), Typeface.ITALIC);
                 break;
         }
+    }
+
+    public void setFontFamily(String value) {
+        setTypeface(Typeface.create(value, Typeface.NORMAL));
     }
 
     public void setAlign(String value) {

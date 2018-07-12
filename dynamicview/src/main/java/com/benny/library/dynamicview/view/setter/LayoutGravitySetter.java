@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -26,7 +27,11 @@ public class LayoutGravitySetter {
             GravityProperty property = GravityProperty.of(view.getContext(), value);
             if (lparams instanceof LinearLayout.LayoutParams) {
                 ((LinearLayout.LayoutParams) lparams).gravity = property.gravity;
-            } else if (lparams instanceof RelativeLayout.LayoutParams) {
+            }
+            else if (lparams instanceof FrameLayout.LayoutParams) {
+                ((FrameLayout.LayoutParams) lparams).gravity = property.gravity;
+            }
+            else if (lparams instanceof RelativeLayout.LayoutParams) {
                 setRelativeLayoutGravity((RelativeLayout.LayoutParams) lparams, property.gravity);
             }
         }

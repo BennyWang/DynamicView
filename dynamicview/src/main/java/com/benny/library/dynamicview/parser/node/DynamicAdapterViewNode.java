@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.benny.library.dynamicview.parser.DynamicViewTree;
-import com.benny.library.dynamicview.view.ViewBinder;
-import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.parser.property.NodeProperties;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.benny.library.dynamicview.view.ViewBinderImpl;
+import com.benny.library.dynamicview.view.ViewType;
 
 public class DynamicAdapterViewNode extends DynamicViewNode {
     private DynamicViewNode adapter;
@@ -31,7 +28,7 @@ public class DynamicAdapterViewNode extends DynamicViewNode {
         return true;
     }
 
-    public View createView(Context context, ViewGroup parent, ViewBinder viewBinder) throws Exception {
+    public View createView(Context context, ViewGroup parent, ViewBinderImpl viewBinder) throws Exception {
         View view = super.createView(context, parent, viewBinder);
         if (adapter != null) {
             ((ViewType.AdapterView) view).setInflater(new DynamicViewTree(adapter, viewBinder.getActionProcessor()));

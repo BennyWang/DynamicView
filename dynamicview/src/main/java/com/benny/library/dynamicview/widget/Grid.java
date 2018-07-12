@@ -3,14 +3,14 @@ package com.benny.library.dynamicview.widget;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.benny.library.dynamicview.annotations.DynamicView;
+
 import com.benny.library.dynamicview.parser.ViewInflater;
 import com.benny.library.dynamicview.view.ViewType;
 import com.benny.library.dynamicview.widget.adapter.GridAdapter;
 
 import org.json.JSONArray;
 
-@DynamicView
+@com.benny.library.dynamicview.annotations.DynamicView
 public class Grid extends RecyclerView implements ViewType.AdapterView {
     private static final int DEFAULT_SPAN_COUNT = 1;
 
@@ -45,5 +45,10 @@ public class Grid extends RecyclerView implements ViewType.AdapterView {
     @Override
     public void setInflater(ViewInflater inflater) {
         adapter.setInflater(inflater);
+    }
+
+    @Override
+    public void setRange(String range) {
+        adapter.setRange(range);
     }
 }
